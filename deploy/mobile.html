@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Chance 进度看板</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+:root { --bg:#f5f6f8; --card:#fff; --primary:#4a90d9; --text:#333; --sub:#888; --border:#e8eaed; }
+body { font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; background:var(--bg); color:var(--text); min-height:100vh; -webkit-font-smoothing:antialiased; }
+
+/* Header */
+.header { background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%); color:#fff; padding:12px 16px; position:sticky; top:0; z-index:100; box-shadow:0 2px 12px rgba(0,0,0,0.2); }
+.header-top { display:flex; align-items:center; justify-content:space-between; }
+.header h1 { font-size:17px; font-weight:700; }
+.header .sub { font-size:11px; opacity:0.65; margin-top:2px; }
+.sync-btn { padding:6px 14px; border:none; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer; font-family:inherit; background:#4caf50; color:#fff; white-space:nowrap; }
+.sync-btn:active { transform:scale(0.95); }
+.sync-btn.syncing { background:#ff9800; }
+.stats-row { display:flex; gap:8px; margin-top:8px; }
+.stat-chip { background:rgba(255,255,255,0.12); border-radius:6px; padding:4px 10px; flex:1; text-align:center; }
+.stat-chip .num { font-size:15px; font-weight:700; }
+.stat-chip .label { font-size:10px; opacity:0.7; }
+
+/* Filter */
+.filter-bar { position:sticky; top:88px; z-index:90; background:var(--bg); padding:8px 12px; display:flex; gap:6px; flex-wrap:wrap; border-bottom:1px solid var(--border); }
+.filter-bar select, .filter-bar input { padding:6px 10px; border:1px solid #ddd; border-radius:6px; font-size:12px; outline:none; font-family:inherit; background:#fff; max-width:48%; }
+.filter-bar input { flex:1; min-width:120px; }
+.type-tabs { display:flex; gap:4px; width:100%; }
+.type-tab { flex:1; padding:6px; text-align:center; border-radius:6px; font-size:12px; font-weight:600; background:#e8eaed; color:#666; border:none; font-family:inherit; cursor:pointer; }
+.type-tab.active { background:var(--primary); color:#fff; }
+
+/* Section */
+.section-title { font-size:15px; font-weight:700; margin:16px 12px 8px; padding-left:10px; border-left:3px solid var(--primary); display:flex; align-items:center; gap:6px; }
+.section-title .sec-count { font-size:11px; color:var(--sub); font-weight:400; }
+.section-title.order { border-left-color:#e74c3c; }
+.section-title.sample { border-left-color:#3498db; }
+
+/* Customer group */
+.cust-group { margin:0 12px 16px; }
+.cust-header { display:flex; align-items:center; gap:6px; margin-bottom:6px; }
+.cust-dot { width:8px; height:8px; border-radius:50%; }
+.cust-name { font-size:14px; font-weight:700; }
+.cust-count { font-size:11px; color:var(--sub); }
+
+/* Card */
+.card { background:var(--card); border-radius:10px; margin-bottom:8px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,0.06); border:1px solid var(--border); }
+.card-header { padding:10px 14px; cursor:pointer; }
+.card-header:active { background:#f6f9ff; }
+.card-row1 { display:flex; align-items:center; gap:6px; margin-bottom:4px; }
+.card-name { font-size:14px; font-weight:600; color:#1a1a2e; flex:1; line-height:1.3; }
+.card-row2 { display:flex; gap:8px; flex-wrap:wrap; font-size:11px; color:var(--sub); }
+.card-status { font-size:12px; color:#555; line-height:1.4; margin-top:4px; }
+.status-dot { display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:3px; vertical-align:middle; flex-shrink:0; }
+.status-dot.active { background:#ff9800; }
+.status-dot.shipped { background:#00695c; }
+.status-dot.done { background:#4caf50; }
+.expand-icon { font-size:10px; color:var(--primary); transition:transform 0.2s; }
+.card.expanded .expand-icon { transform:rotate(180deg); }
+
+/* Badges */
+.badge { display:inline-block; padding:1px 6px; border-radius:6px; font-size:10px; font-weight:600; white-space:nowrap; margin:1px 2px; }
+.b-stage-quote, .b-stage-报价 { background:#e3f2fd; color:#1565c0; }
+.b-stage-start, .b-stage-起版 { background:#ede7f6; color:#4527a0; }
+.b-stage-starting, .b-stage-起版中 { background:#fff3e0; color:#e65100; }
+.b-stage-quoted, .b-stage-已报价 { background:#e8f5e9; color:#2e7d32; }
+.b-stage-sent, .b-stage-已寄版 { background:#e0f2f1; color:#00695c; }
+.b-stage-ordered, .b-stage-已下单 { background:#fce4ec; color:#c62828; }
+.b-stage-archive, .b-stage-归档 { background:#f5f5f5; color:#757575; }
+.b-cat-dev, .b-cat-开发版 { background:#e3f2fd; color:#1565c0; }
+.b-cat-qty, .b-cat-有数量 { background:#e8f5e9; color:#2e7d32; }
+.b-cat-prod, .b-cat-生产中 { background:#fff3e0; color:#e65100; }
+.b-cat-ship, .b-cat-已出货 { background:#e0f2f1; color:#00695c; }
+.b-cat-paid, .b-cat-已收款 { background:#e8f5e9; color:#2e7d32; }
+.b-cat-archive, .b-cat-归档 { background:#f5f5f5; color:#757575; }
+.b-factory { background:#f3e5f5; color:#6a1b9a; }
+.b-done { background:#e8f5e9; color:#2e7d32; }
+.b-overdue { background:#ffebee; color:#c62828; }
+.b-soon { background:#fff3e0; color:#e65100; }
+.b-ok { background:#e8f5e9; color:#2e7d32; }
+
+/* History */
+.card-history { display:none; border-top:1px solid var(--border); background:#fafbfc; padding:10px 14px; }
+.card.expanded .card-history { display:block; }
+.h-title { font-size:11px; font-weight:700; color:var(--sub); margin-bottom:6px; }
+.h-item { display:flex; gap:8px; padding:6px 0; border-bottom:1px solid #f0f0f0; }
+.h-item:last-child { border-bottom:none; }
+.h-dot { flex-shrink:0; width:7px; height:7px; border-radius:50%; margin-top:4px; }
+.h-dot.done { background:#4caf50; }
+.h-dot.going { border:2px solid #ff9800; background:#fff; }
+.h-content { flex:1; min-width:0; }
+.h-meta { display:flex; gap:4px; flex-wrap:wrap; align-items:center; margin-bottom:2px; }
+.h-text { font-size:12px; color:#555; line-height:1.4; }
+.h-next { font-size:11px; color:#ff9800; margin-top:2px; }
+.h-date { font-size:10px; color:#aaa; }
+
+/* Misc */
+.empty-state { text-align:center; padding:40px; color:var(--sub); font-size:13px; }
+.loading-state { text-align:center; padding:60px; color:var(--sub); }
+.spinner { display:inline-block; width:28px; height:28px; border:3px solid #e0e0e0; border-top-color:var(--primary); border-radius:50%; animation:spin 0.8s linear infinite; margin-bottom:8px; }
+@keyframes spin { to { transform:rotate(360deg); } }
+.toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#333; color:#fff; padding:8px 20px; border-radius:8px; font-size:12px; z-index:1000; opacity:0; transition:opacity 0.3s; pointer-events:none; }
+.toast.show { opacity:1; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div>
+      <h1>Chance 进度看板</h1>
+      <div class="sub" id="updateTime">加载中...</div>
+    </div>
+    <button class="sync-btn" id="syncBtn" onclick="triggerSync()">🔄 刷新</button>
+  </div>
+  <div class="stats-row">
+    <div class="stat-chip"><div class="num" id="totalOrders">-</div><div class="label">订单</div></div>
+    <div class="stat-chip"><div class="num" id="totalProjects">-</div><div class="label">样板</div></div>
+    <div class="stat-chip"><div class="num" id="totalOrderProgress">-</div><div class="label">订单进度</div></div>
+    <div class="stat-chip"><div class="num" id="totalProgress">-</div><div class="label">样板进度</div></div>
+  </div>
+</div>
+
+<div class="filter-bar">
+  <div class="type-tabs">
+    <button class="type-tab active" data-type="" onclick="setTab('')">全部</button>
+    <button class="type-tab" data-type="order" onclick="setTab('order')">订单</button>
+    <button class="type-tab" data-type="sample" onclick="setTab('sample')">样板</button>
+  </div>
+  <input type="text" id="searchInput" placeholder="搜索项目/客户/跟单..." oninput="renderAll()">
+  <select id="customerFilter" onchange="renderAll()"><option value="">全部客户</option></select>
+  <select id="catFilter" onchange="renderAll()"><option value="">全部分类</option></select>
+  <select id="statusFilter" onchange="renderAll()">
+    <option value="">全部状态</option>
+    <option value="active">进行中</option>
+    <option value="completed">已完成</option>
+  </select>
+</div>
+
+<div id="content"><div class="loading-state"><div class="spinner"></div><div>正在加载...</div></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+let projectRecords=[], progressRecords=[], orderRecords=[], orderProgressRecords=[], dataUpdatedAt=null;
+let curType='';
+
+async function loadData(){
+  try{
+    const r=await fetch('./data.json?v='+Date.now());
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    const d=await r.json();
+    projectRecords=d.projects||[];
+    progressRecords=d.progress||[];
+    orderRecords=d.orders||[];
+    orderProgressRecords=d.orderProgress||[];
+    dataUpdatedAt=d.updatedAt||null;
+    buildFilterOptions();
+    updateTimeDisplay();
+    renderAll();
+  }catch(e){
+    document.getElementById('content').innerHTML='<div class="empty-state">数据加载失败，请刷新重试</div>';
+  }
+}
+
+function updateTimeDisplay(){
+  if(!dataUpdatedAt) return;
+  const d=new Date(dataUpdatedAt);
+  const s=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+  document.getElementById('updateTime').textContent='数据更新：'+s;
+}
+
+async function triggerSync(){
+  const b=document.getElementById('syncBtn');
+  b.className='sync-btn syncing'; b.textContent='⏳ 刷新中';
+  try{ await loadData(); showToast('数据已刷新'); }
+  catch(e){ showToast('刷新失败'); }
+  finally{ b.className='sync-btn'; b.textContent='🔄 刷新'; }
+}
+
+function setTab(t){ curType=t; document.querySelectorAll('.type-tab').forEach(b=>b.classList.toggle('active',b.dataset.type===t)); renderAll(); }
+function showToast(m){ const t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),2500); }
+
+function fmtDate(d){
+  if(!d)return'';
+  if(/^\d{2}-\d{2}$/.test(d))return d;
+  const m=d.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if(m)return m[2]+'-'+m[3];
+  return d;
+}
+function calcDays(dateStr){
+  if(!dateStr)return'';
+  const m=dateStr.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if(!m)return'';
+  const start=new Date(+m[1],+m[2]-1,+m[3]);
+  const today=new Date(); today.setHours(0,0,0,0);
+  const diff=Math.round((today-start)/86400000);
+  return diff>=0?diff:'';
+}
+
+// Sort priorities
+function customerPriority(c){ if(c==='KSJ')return 1; if(c==='GA')return 2; return 99; }
+function catPriority(c){ if(c==='生产中')return 1; if(c==='已出货')return 2; if(c==='已收款')return 3; return 99; }
+
+// Latest progress
+function latestSample(id){
+  const items=progressRecords.filter(r=>r.projectId===id);
+  return items.length?items.reduce((a,b)=>{ if(a.updateDate!==b.updateDate)return a.updateDate>b.updateDate?a:b; return a.editTime>b.editTime?a:b; }):null;
+}
+function latestOrder(id){
+  const items=orderProgressRecords.filter(r=>r.projectId===id);
+  return items.length?items.reduce((a,b)=>{ if(a.updateDate!==b.updateDate)return a.updateDate>b.updateDate?a:b; return a.editTime>b.editTime?a:b; }):null;
+}
+function allSampleProgress(id){ return progressRecords.filter(r=>r.projectId===id).sort((a,b)=>{ if(b.updateDate!==a.updateDate)return b.updateDate>a.updateDate?1:-1; return b.editTime-a.editTime; }); }
+function allOrderProgress(id){ return orderProgressRecords.filter(r=>r.projectId===id).sort((a,b)=>{ if(b.updateDate!==a.updateDate)return b.updateDate>a.updateDate?1:-1; return b.editTime-a.editTime; }); }
+function isSampleDone(id){ const items=progressRecords.filter(r=>r.projectId===id); return items.length&&items.every(r=>r.completed); }
+function isOrderDone(id){ const items=orderProgressRecords.filter(r=>r.projectId===id); return items.length&&items.every(r=>r.completed); }
+
+// Filter options
+function buildFilterOptions(){
+  const cats=new Set(), customers=new Set();
+  progressRecords.forEach(r=>{ if(r.cat)cats.add(r.cat); });
+  orderProgressRecords.forEach(r=>{ if(r.cat)cats.add(r.cat); });
+  projectRecords.forEach(p=>{ if(p.customer)customers.add(p.customer); });
+  orderRecords.forEach(p=>{ if(p.customer)customers.add(p.customer); });
+  const ctf=document.getElementById('catFilter'); const cv=ctf.value;
+  ctf.innerHTML='<option value="">全部分类</option>'+[...cats].sort().map(c=>'<option value="'+c+'">'+c+'</option>').join('');
+  ctf.value=cv;
+  const cf=document.getElementById('customerFilter'); const cfv=cf.value;
+  cf.innerHTML='<option value="">全部客户</option>'+[...customers].sort((a,b)=>customerPriority(a)-customerPriority(b)).map(c=>'<option value="'+c+'">'+c+'</option>').join('');
+  cf.value=cfv;
+}
+
+// Badges
+const stageCls={'报价':'b-stage-报价','起版':'b-stage-起版','起版中':'b-stage-起版中','已报价':'b-stage-已报价','已寄版':'b-stage-已寄版','已下单':'b-stage-已下单','归档':'b-stage-归档'};
+function bStage(s){ return '<span class="badge '+(stageCls[s]||'')+'">'+s+'</span>'; }
+function bCat(c){ const m={'开发版':'b-cat-开发版','有数量':'b-cat-有数量','生产中':'b-cat-生产中','已出货':'b-cat-已出货','已收款':'b-cat-已收款','归档':'b-cat-归档'}; return '<span class="badge '+(m[c]||'')+'">'+c+'</span>'; }
+const customerColors={'KSJ':'#e74c3c','GA':'#3498db','迅捷诚':'#27ae60'};
+
+function renderAll(){
+  const q=document.getElementById('searchInput').value.toLowerCase();
+  const cf=document.getElementById('customerFilter').value;
+  const ctf=document.getElementById('catFilter').value;
+  const stf=document.getElementById('statusFilter').value;
+
+  document.getElementById('totalOrders').textContent=orderRecords.length;
+  document.getElementById('totalProjects').textContent=projectRecords.length;
+  document.getElementById('totalOrderProgress').textContent=orderProgressRecords.length;
+  document.getElementById('totalProgress').textContent=progressRecords.length;
+
+  // Filter orders (exclude archived)
+  let orders=orderRecords.filter(p=>{
+    if(q&&!p.name.toLowerCase().includes(q)&&!p.merch.toLowerCase().includes(q)&&!p.customer.toLowerCase().includes(q))return false;
+    if(cf&&p.customer!==cf)return false;
+    const l=latestOrder(p.id); if(!l)return false;
+    if(l.cat==='归档'||l.cat==='已归档')return false;
+    if(ctf&&l.cat!==ctf)return false;
+    if(stf==='active'&&isOrderDone(p.id))return false;
+    if(stf==='completed'&&!isOrderDone(p.id))return false;
+    return true;
+  });
+  // Sort orders: customer -> cat -> date desc
+  orders.sort((a,b)=>{
+    const cp=customerPriority(a.customer)-customerPriority(b.customer); if(cp)return cp;
+    const la=latestOrder(a.id),lb=latestOrder(b.id);
+    const catP=catPriority(la?la.cat:null)-catPriority(lb?lb.cat:null); if(catP)return catP;
+    if(la&&lb){ if(lb.updateDate!==la.updateDate)return lb.updateDate>la.updateDate?1:-1; return lb.editTime-la.editTime; }
+    return 0;
+  });
+
+  // Filter samples
+  let samples=projectRecords.filter(p=>{
+    if(q&&!p.name.toLowerCase().includes(q)&&!p.merch.toLowerCase().includes(q)&&!p.customer.toLowerCase().includes(q))return false;
+    if(cf&&p.customer!==cf)return false;
+    const l=latestSample(p.id); if(!l)return false;
+    if(ctf&&l.cat!==ctf)return false;
+    if(stf==='active'&&isSampleDone(p.id))return false;
+    if(stf==='completed'&&!isSampleDone(p.id))return false;
+    return true;
+  });
+  // Sort samples: customer -> done last -> date desc
+  samples.sort((a,b)=>{
+    const cp=customerPriority(a.customer)-customerPriority(b.customer); if(cp)return cp;
+    const da=isSampleDone(a.id),db=isSampleDone(b.id); if(da!==db)return da?1:-1;
+    const la=latestSample(a.id),lb=latestSample(b.id);
+    if(la&&lb){ if(lb.updateDate!==la.updateDate)return lb.updateDate>la.updateDate?1:-1; return lb.editTime-la.editTime; }
+    return 0;
+  });
+
+  // Group by customer
+  function groupBy(projects){
+    const g={};
+    projects.forEach(p=>{ if(!g[p.customer])g[p.customer]=[]; g[p.customer].push(p); });
+    return Object.entries(g).sort((a,b)=>customerPriority(a[0])-customerPriority(b[0]));
+  }
+
+  let html='';
+  if(curType!=='sample'){
+    if(orders.length){
+      html+='<div class="section-title order">📦 订单进度 <span class="sec-count">'+orders.length+'</span></div>';
+      html+=renderGroups(groupBy(orders),'order');
+    }else if(!curType){ html+='<div class="section-title order">📦 订单进度</div><div class="empty-state">没有匹配的订单</div>'; }
+  }
+  if(curType!=='order'){
+    if(samples.length){
+      html+='<div class="section-title sample">📐 样板进度 <span class="sec-count">'+samples.length+'</span></div>';
+      html+=renderGroups(groupBy(samples),'sample');
+    }else if(!curType){ html+='<div class="section-title sample">📐 样板进度</div><div class="empty-state">没有匹配的样板</div>'; }
+  }
+  if(!html) html='<div class="empty-state">没有匹配的项目</div>';
+  document.getElementById('content').innerHTML=html;
+}
+
+function renderGroups(groups,type){
+  return groups.map(([cust,projects])=>{
+    return '<div class="cust-group">'+
+      '<div class="cust-header">'+
+        '<div class="cust-dot" style="background:'+(customerColors[cust]||'#888')+'"></div>'+
+        '<span class="cust-name">'+cust+'</span>'+
+        '<span class="cust-count">'+projects.length+'</span>'+
+      '</div>'+
+      projects.map(p=>type==='order'?renderOrderCard(p):renderSampleCard(p)).join('')+
+    '</div>';
+  }).join('');
+}
+
+function renderOrderCard(p){
+  const l=latestOrder(p.id);
+  const ap=allOrderProgress(p.id);
+  const done=isOrderDone(p.id);
+  const sdCls=done?'done':(l&&l.cat==='已出货'?'shipped':'active');
+  const cdCls=p.countdown&&p.countdown.includes('-')?'b-overdue':(p.countdown&&p.countdown.includes('剩')&&parseInt(p.countdown.match(/\d+/))<=7?'b-soon':'b-ok');
+  const id='oc-'+p.id;
+  return '<div class="card" id="'+id+'">'+
+    '<div class="card-header" onclick="toggleCard(\''+id+'\')">'+
+      '<div class="card-row1">'+
+        '<span class="status-dot '+sdCls+'"></span>'+
+        '<span class="card-name">'+p.name+'</span>'+
+        '<span class="expand-icon">▸</span>'+
+      '</div>'+
+      '<div class="card-status">'+(l?l.status:'')+(done?' <span class="badge b-done">已完成</span>':'')+'</div>'+
+      '<div class="card-row2">'+
+        (l?bCat(l.cat):'')+' '+
+        (p.countdown?'<span class="badge '+cdCls+'">'+p.countdown+'</span>':'')+
+        '<span>'+p.merch+'</span>'+
+        (l?'<span>更新:'+fmtDate(l.updateDate)+'</span>':'')+
+        (p.factoryDate?'<span>货期:'+fmtDate(p.factoryDate)+'</span>':'')+
+        (p.quantity?'<span>'+p.quantity.toLocaleString()+'件</span>':'')+
+      '</div>'+
+    '</div>'+
+    '<div class="card-history">'+
+      '<div class="h-title">历史进度（'+ap.length+'条）</div>'+
+      ap.map(r=>'<div class="h-item"><div class="h-dot '+(r.completed?'done':'going')+'"></div><div class="h-content">'+
+        '<div class="h-meta">'+bCat(r.cat)+'<span class="h-date">'+fmtDate(r.updateDate)+'</span></div>'+
+        '<div class="h-text">'+r.status+'</div>'+
+        (r.nextPlan?'<div class="h-next">下一步：'+r.nextPlan+'</div>':'')+
+      '</div></div>').join('')+
+    '</div>'+
+  '</div>';
+}
+
+function renderSampleCard(p){
+  const l=latestSample(p.id);
+  const ap=allSampleProgress(p.id);
+  const done=isSampleDone(p.id);
+  const sdCls=done?'done':(l&&l.stage&&l.stage.includes('已寄版')?'shipped':'active');
+  const id='sc-'+p.id;
+  return '<div class="card" id="'+id+'">'+
+    '<div class="card-header" onclick="toggleCard(\''+id+'\')">'+
+      '<div class="card-row1">'+
+        '<span class="status-dot '+sdCls+'"></span>'+
+        '<span class="card-name">'+p.name+'</span>'+
+        '<span class="expand-icon">▸</span>'+
+      '</div>'+
+      '<div class="card-status">'+(l?l.status:'')+(done?' <span class="badge b-done">已完成</span>':'')+'</div>'+
+      '<div class="card-row2">'+
+        (l?l.stage.map(s=>bStage(s)).join(''):'')+' '+
+        (l?bCat(l.cat):'')+' '+
+        (l&&l.factory?'<span class="badge b-factory">'+l.factory+'</span>':'')+
+        '<span>'+p.merch+'</span>'+
+        (calcDays(l?l.updateDate:'')!==''?'<span>'+calcDays(l?l.updateDate:'')+'天</span>':'')+
+        (l?'<span>更新:'+fmtDate(l.updateDate)+'</span>':'')+
+      '</div>'+
+    '</div>'+
+    '<div class="card-history">'+
+      '<div class="h-title">历史进度（'+ap.length+'条）</div>'+
+      ap.map(r=>'<div class="h-item"><div class="h-dot '+(r.completed?'done':'going')+'"></div><div class="h-content">'+
+        '<div class="h-meta">'+(r.stage?r.stage.map(s=>bStage(s)).join(''):'')+' '+(r.cat?bCat(r.cat):'')+(r.factory?' <span class="badge b-factory">'+r.factory+'</span>':'')+'<span class="h-date">'+fmtDate(r.updateDate)+'</span></div>'+
+        '<div class="h-text">'+r.status+'</div>'+
+        (r.nextPlan?'<div class="h-next">下一步：'+r.nextPlan+'</div>':'')+
+      '</div></div>').join('')+
+    '</div>'+
+  '</div>';
+}
+
+function toggleCard(id){
+  const el=document.getElementById(id);
+  el.classList.toggle('expanded');
+}
+
+loadData();
+</script>
+</body>
+</html>

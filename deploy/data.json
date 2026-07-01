@@ -1,0 +1,693 @@
+{
+  "orderStyles": [
+    {
+      "id": "rb3hpS",
+      "styleNo": "RXDJM9102292",
+      "factoryDate": "2026-08-05",
+      "qty": 3600,
+      "shipQty": 0,
+      "factory": "宏威",
+      "color": "BLUE"
+    },
+    {
+      "id": "rH3aCz",
+      "styleNo": "XRJKM5102320",
+      "factoryDate": "2026-08-30",
+      "qty": 3600,
+      "shipQty": 0,
+      "factory": "宏威",
+      "color": "BLUE"
+    },
+    {
+      "id": "rO6U4S",
+      "styleNo": "XRJKM5102321",
+      "factoryDate": "2026-08-30",
+      "qty": 2400,
+      "shipQty": 0,
+      "factory": "宏威",
+      "color": "BLUE"
+    },
+    {
+      "id": "ryzccM",
+      "styleNo": "XRJKM5102322",
+      "factoryDate": "2026-08-30",
+      "qty": 2400,
+      "shipQty": 0,
+      "factory": "宏威",
+      "color": "NAVY"
+    },
+    {
+      "id": "ribQXY",
+      "styleNo": "C2125",
+      "factoryDate": "2026-07-02",
+      "qty": 240,
+      "shipQty": 0,
+      "factory": "圆洋",
+      "color": "MEDIUM DENIM"
+    },
+    {
+      "id": "rsouuU",
+      "styleNo": "C2113",
+      "factoryDate": "2026-07-17",
+      "qty": 300,
+      "shipQty": 0,
+      "factory": "卓安",
+      "color": "NAVY"
+    },
+    {
+      "id": "rHWcqx",
+      "styleNo": "C7451",
+      "factoryDate": "2026-06-26",
+      "qty": 240,
+      "shipQty": 222,
+      "factory": "卓安",
+      "color": "DARK DENIM"
+    }
+  ],
+  "projects": [
+    {
+      "id": "rk0ohr",
+      "name": "DOM 童装",
+      "customer": "KSJ",
+      "merch": "Dom",
+      "date": "2026-06-24",
+      "days": ""
+    },
+    {
+      "id": "r0CzLu",
+      "name": "GL358668植绒抹胸",
+      "customer": "GA",
+      "merch": "SUMMER",
+      "date": "2026-06-22",
+      "days": ""
+    },
+    {
+      "id": "rKcRyr",
+      "name": "阔腿裤套装",
+      "customer": "迅捷诚",
+      "merch": "汪琼",
+      "date": "2026-06-22",
+      "days": ""
+    },
+    {
+      "id": "rBRlic",
+      "name": "T恤2色 十字架车皮",
+      "customer": "KSJ",
+      "merch": "Noshaba",
+      "date": "2026-06-19",
+      "days": ""
+    },
+    {
+      "id": "rrnp9k",
+      "name": "Josh T恤",
+      "customer": "KSJ",
+      "merch": "Josh",
+      "date": "2026-06-17",
+      "days": ""
+    },
+    {
+      "id": "rPoJYy",
+      "name": "2款提花裤",
+      "customer": "KSJ",
+      "merch": "Yejin",
+      "date": "2026-06-13",
+      "days": ""
+    },
+    {
+      "id": "riRp84",
+      "name": "Stone Falcon 3款",
+      "customer": "KSJ",
+      "merch": "Dom",
+      "date": "2026-06-11",
+      "days": ""
+    },
+    {
+      "id": "ro6Iin",
+      "name": "Sandy_2款衣服开发",
+      "customer": "KSJ",
+      "merch": "Sandy",
+      "date": "2026-05-17",
+      "days": ""
+    },
+    {
+      "id": "rIqtd6",
+      "name": "7款印花T恤",
+      "customer": "KSJ",
+      "merch": "Jazmyne",
+      "date": "2026-06-25",
+      "days": ""
+    },
+    {
+      "id": "rKS2xt",
+      "name": "提花衣服+仿羊羔绒",
+      "customer": "KSJ",
+      "merch": "Hackeem",
+      "date": "2026-06-09",
+      "days": ""
+    },
+    {
+      "id": "rHnVA2",
+      "name": "数码印花夹克+短裤",
+      "customer": "KSJ",
+      "merch": "Syleah",
+      "date": "2026-04-21",
+      "days": ""
+    }
+  ],
+  "progress": [
+    {
+      "id": "rOdcVa",
+      "projectId": "rKS2xt",
+      "stage": [
+        "起版中"
+      ],
+      "cat": "开发版",
+      "factory": "泰新",
+      "status": "待寄版",
+      "nextPlan": "",
+      "updateDate": "2026-07-01",
+      "editTime": 0,
+      "completed": false
+    },
+    {
+      "id": "ryZloS",
+      "projectId": "rBRlic",
+      "stage": [
+        "起版中",
+        "已报价"
+      ],
+      "cat": "有数量",
+      "factory": "宏威",
+      "status": "曹生报价$4.5，C报价$4.95.。厂货期8月底，C货期9-10",
+      "nextPlan": "等宏威起版",
+      "updateDate": "2026-06-23",
+      "editTime": 1782759554951,
+      "completed": false
+    },
+    {
+      "id": "rZAFer",
+      "projectId": "rrnp9k",
+      "stage": [
+        "已报价",
+        "起版中"
+      ],
+      "cat": "有数量",
+      "factory": "宏威",
+      "status": "等宏威起好版",
+      "nextPlan": "",
+      "updateDate": "2026-06-25",
+      "editTime": 1782759554951,
+      "completed": false
+    },
+    {
+      "id": "rOlE8X",
+      "projectId": "r0CzLu",
+      "stage": [
+        "起版中"
+      ],
+      "cat": "有数量",
+      "factory": "卓安",
+      "status": "第二次起版，厂报价$8.7",
+      "nextPlan": "预计6-28寄版",
+      "updateDate": "2026-06-22",
+      "editTime": 1782875394308,
+      "completed": true
+    },
+    {
+      "id": "rKuS0F",
+      "projectId": "r0CzLu",
+      "stage": [
+        "已寄版",
+        "已报价"
+      ],
+      "cat": "有数量",
+      "factory": "卓安",
+      "status": "6-30第一次办和第二次办一起寄出",
+      "nextPlan": "",
+      "updateDate": "2026-06-29",
+      "editTime": 1782875439752,
+      "completed": true
+    },
+    {
+      "id": "rzHwJr",
+      "projectId": "rk0ohr",
+      "stage": [
+        "报价",
+        "已报价"
+      ],
+      "cat": "开发版",
+      "factory": "宏威",
+      "status": "已报价和货期",
+      "nextPlan": "",
+      "updateDate": "2026-06-30",
+      "editTime": 1782789373472,
+      "completed": true
+    },
+    {
+      "id": "r8Ww2C",
+      "projectId": "rk0ohr",
+      "stage": [
+        "报价"
+      ],
+      "cat": "开发版",
+      "factory": "宏威",
+      "status": "待报价。需确认环保的东西",
+      "nextPlan": "",
+      "updateDate": "2026-06-25",
+      "editTime": 1782789345357,
+      "completed": true
+    },
+    {
+      "id": "rwW64k",
+      "projectId": "rKcRyr",
+      "stage": [
+        "报价"
+      ],
+      "cat": "开发版",
+      "factory": "宏威",
+      "status": "报价：上衣￥68，橡筋裤￥59，不含税，500套单色起订",
+      "nextPlan": "过几天看是否需要起版",
+      "updateDate": "2026-06-23",
+      "editTime": 1782789328824,
+      "completed": true
+    },
+    {
+      "id": "rkxwwm",
+      "projectId": "rIqtd6",
+      "stage": [
+        "报价",
+        "起版中"
+      ],
+      "cat": "开发版",
+      "factory": "宏威",
+      "status": "问美国价格是否在目标价范围，能否先起一件版",
+      "nextPlan": "",
+      "updateDate": "2026-06-29",
+      "editTime": 1782759554951,
+      "completed": false
+    },
+    {
+      "id": "rQO2DR",
+      "projectId": "rPoJYy",
+      "stage": [
+        "报价",
+        "起版"
+      ],
+      "cat": "开发版",
+      "factory": "宏威",
+      "status": "已安排宏威起版",
+      "nextPlan": "寄版+报价",
+      "updateDate": "2026-06-17",
+      "editTime": 1782759554951,
+      "completed": false
+    },
+    {
+      "id": "r363LK",
+      "projectId": "rBRlic",
+      "stage": [
+        "报价",
+        "起版"
+      ],
+      "cat": "有数量",
+      "factory": "陈生",
+      "status": "放弃陈生，不等了",
+      "nextPlan": "",
+      "updateDate": "2026-06-22",
+      "editTime": 1782759554951,
+      "completed": true
+    },
+    {
+      "id": "rAFVHo",
+      "projectId": "rBRlic",
+      "stage": [
+        "报价",
+        "起版"
+      ],
+      "cat": "有数量",
+      "factory": "陈生",
+      "status": "曹生寄布料给工厂报价，明天回复",
+      "nextPlan": "",
+      "updateDate": "2026-06-22",
+      "editTime": 1782759554951,
+      "completed": true
+    },
+    {
+      "id": "r28oCB",
+      "projectId": "rBRlic",
+      "stage": [
+        "报价",
+        "起版"
+      ],
+      "cat": "有数量",
+      "factory": "陈生",
+      "status": "待陈生报价和货期。烫钻价格盘生已报¥5.3",
+      "nextPlan": "需确定陈生跟烫钻怎么对接？",
+      "updateDate": "2026-06-19",
+      "editTime": 1782759554951,
+      "completed": true
+    },
+    {
+      "id": "rHKwp3",
+      "projectId": "riRp84",
+      "stage": [
+        "已报价",
+        "已寄版"
+      ],
+      "cat": "有数量",
+      "factory": "宏威",
+      "status": "已报价给DOM",
+      "nextPlan": "",
+      "updateDate": "2026-06-11",
+      "editTime": 1782759554951,
+      "completed": true
+    },
+    {
+      "id": "rrsqw1",
+      "projectId": "ro6Iin",
+      "stage": [
+        "已报价",
+        "已寄版"
+      ],
+      "cat": "开发版",
+      "factory": "宏威",
+      "status": "寄出第一次PP版，DHL9516126082",
+      "nextPlan": "",
+      "updateDate": "2026-06-22",
+      "editTime": 1782759554951,
+      "completed": true
+    },
+    {
+      "id": "ruVRA1",
+      "projectId": "rrnp9k",
+      "stage": [
+        "已报价",
+        "起版中"
+      ],
+      "cat": "有数量",
+      "factory": "宏威",
+      "status": "曹生寄布料给工厂报价，明天回复",
+      "nextPlan": "工厂报价",
+      "updateDate": "2026-06-22",
+      "editTime": 1782759554951,
+      "completed": true
+    },
+    {
+      "id": "rPRqLJ",
+      "projectId": "rrnp9k",
+      "stage": [
+        "已报价"
+      ],
+      "cat": "有数量",
+      "factory": "陈生",
+      "status": "CT517C款，报价$4.3（烫钻到袖子和下摆）",
+      "nextPlan": "看是否需要起版",
+      "updateDate": "2026-06-18",
+      "editTime": 1782759554951,
+      "completed": true
+    },
+    {
+      "id": "rmSqME",
+      "projectId": "rrnp9k",
+      "stage": [
+        "已报价",
+        "起版中"
+      ],
+      "cat": "有数量",
+      "factory": "陈生",
+      "status": "已通知陈生按尺寸表起版，并给我提花布",
+      "nextPlan": "",
+      "updateDate": "2026-06-16",
+      "editTime": 1782759554951,
+      "completed": true
+    },
+    {
+      "id": "rnv7o0",
+      "projectId": "rKcRyr",
+      "stage": [
+        "报价"
+      ],
+      "cat": "开发版",
+      "factory": "宏威",
+      "status": "待报价，RMB，不含税",
+      "nextPlan": "",
+      "updateDate": "2026-06-22",
+      "editTime": 1782759554951,
+      "completed": true
+    },
+    {
+      "id": "rRITdi",
+      "projectId": "rIqtd6",
+      "stage": [
+        "报价",
+        "起版中"
+      ],
+      "cat": "开发版",
+      "factory": "宏威",
+      "status": "问美国尺寸表和布料，ai文件",
+      "nextPlan": "",
+      "updateDate": "2026-06-25",
+      "editTime": 1782759554951,
+      "completed": true
+    },
+    {
+      "id": "rmO9VA",
+      "projectId": "rHnVA2",
+      "stage": [
+        "起版中"
+      ],
+      "cat": "开发版",
+      "factory": "泰新",
+      "status": "待寄版",
+      "nextPlan": "",
+      "updateDate": "2026-07-01",
+      "editTime": 0,
+      "completed": false
+    }
+  ],
+  "orders": [
+    {
+      "id": "rD2gfF",
+      "name": "格子-男长裤",
+      "customer": "GA",
+      "merch": "Nuzrul",
+      "date": "2026-04-21",
+      "countdown": "剩37天",
+      "factoryDate": "2026-08-05",
+      "quantity": 3600
+    },
+    {
+      "id": "rsifUf",
+      "name": "Yejin提花衣服",
+      "customer": "KSJ",
+      "merch": "Nuzrul",
+      "date": "2026-05-09",
+      "countdown": "剩62天",
+      "factoryDate": "2026-08-30",
+      "quantity": 8400
+    },
+    {
+      "id": "r9ZkQJ",
+      "name": "C2125麂皮牛仔衣服",
+      "customer": "GA",
+      "merch": "潘小姐",
+      "date": "2026-05-01",
+      "countdown": "剩3天",
+      "factoryDate": "2026-07-02",
+      "quantity": 240
+    },
+    {
+      "id": "rI5c4Y",
+      "name": "C2113款条纹衣服",
+      "customer": "GA",
+      "merch": "潘小姐",
+      "date": "2026-05-01",
+      "countdown": "剩18天",
+      "factoryDate": "2026-07-17",
+      "quantity": 300
+    },
+    {
+      "id": "rsIm0R",
+      "name": "C7451无袖连衣裤",
+      "customer": "GA",
+      "merch": "潘小姐",
+      "date": "2026-05-01",
+      "countdown": "剩-3天",
+      "factoryDate": "2026-06-26",
+      "quantity": 240
+    }
+  ],
+  "orderProgress": [
+    {
+      "id": "rMO3HR",
+      "projectId": "r9ZkQJ",
+      "cat": "生产中",
+      "status": "改30号尾查，洗水色偏黄偏浅，工厂返工喷油，翻查线头",
+      "nextPlan": "问工厂翻查情况",
+      "updateDate": "2026-06-29",
+      "editTime": 1782760474428,
+      "completed": false
+    },
+    {
+      "id": "rxBUvd",
+      "projectId": "r9ZkQJ",
+      "cat": "生产中",
+      "status": "6-30已尾查，已寄两件大货和绿扣版给潘小姐看洗水",
+      "nextPlan": "待工厂返修门筒弯曲露底筒问题和是否出货问题",
+      "updateDate": "2026-07-01",
+      "editTime": 1782875146792,
+      "completed": false
+    },
+    {
+      "id": "rsHcbw",
+      "projectId": "rsIm0R",
+      "cat": "已出货",
+      "status": "6-26尾查，6-27已进仓，入仓需要给货运司机打印入仓单",
+      "nextPlan": "扣款邮件待处理",
+      "updateDate": "2026-06-27",
+      "editTime": 1782760474428,
+      "completed": false
+    },
+    {
+      "id": "rungxL",
+      "projectId": "rI5c4Y",
+      "cat": "生产中",
+      "status": "洗水唛成分已确认给工厂",
+      "nextPlan": "待工厂处理领子染色问题，确认船头版是否7-3前寄出",
+      "updateDate": "2026-06-25",
+      "editTime": 1782760474428,
+      "completed": false
+    },
+    {
+      "id": "rYB6lc",
+      "projectId": "rD2gfF",
+      "cat": "生产中",
+      "status": "退给工厂样板：20260601和20260120",
+      "nextPlan": "",
+      "updateDate": "2026-06-23",
+      "editTime": 1782760474428,
+      "completed": false
+    },
+    {
+      "id": "rFpsax",
+      "projectId": "r9ZkQJ",
+      "cat": "生产中",
+      "status": "报客户货期7-2，待确认",
+      "nextPlan": "",
+      "updateDate": "2026-06-17",
+      "editTime": 1782760474428,
+      "completed": false
+    },
+    {
+      "id": "rMPFUg",
+      "projectId": "rsifUf",
+      "cat": "生产中",
+      "status": "今天问美国评语",
+      "nextPlan": "",
+      "updateDate": "2026-06-17",
+      "editTime": 1782760474428,
+      "completed": false
+    },
+    {
+      "id": "rYcjSR",
+      "projectId": "r9ZkQJ",
+      "cat": "生产中",
+      "status": "箱唛已批OK，吊牌吊牌贴纸和中包贴纸已批OK，船头版评语：凤眼开太大，扣子容易掉出，待处理",
+      "nextPlan": "看大货开凤眼是否太大，6-29尾查，尾查前自行看看大货情况",
+      "updateDate": "2026-06-27",
+      "editTime": 1782760474428,
+      "completed": true
+    },
+    {
+      "id": "rd5eCY",
+      "projectId": "rsIm0R",
+      "cat": "生产中",
+      "status": "已退绿扣版给GA，出货后再退船头板给GA",
+      "nextPlan": "",
+      "updateDate": "2026-06-24",
+      "editTime": 1782760474428,
+      "completed": true
+    },
+    {
+      "id": "rgL9Qe",
+      "projectId": "rsIm0R",
+      "cat": "生产中",
+      "status": "尾查25号",
+      "nextPlan": "",
+      "updateDate": "2026-06-23",
+      "editTime": 1782760474428,
+      "completed": true
+    },
+    {
+      "id": "rmVCYE",
+      "projectId": "rI5c4Y",
+      "cat": "生产中",
+      "status": "待客户回复洗水唛是否加捆边成份",
+      "nextPlan": "",
+      "updateDate": "2026-06-23",
+      "editTime": 1782760474428,
+      "completed": true
+    },
+    {
+      "id": "rmpl41",
+      "projectId": "rI5c4Y",
+      "cat": "生产中",
+      "status": "车好一件大货拿去洗水",
+      "nextPlan": "看洗水回来捆边的情况",
+      "updateDate": "2026-06-22",
+      "editTime": 1782760474428,
+      "completed": true
+    },
+    {
+      "id": "rxyHCb",
+      "projectId": "r9ZkQJ",
+      "cat": "生产中",
+      "status": "已寄出船头版",
+      "nextPlan": "等评语",
+      "updateDate": "2026-06-22",
+      "editTime": 1782760474428,
+      "completed": true
+    },
+    {
+      "id": "rfSRo6",
+      "projectId": "rsIm0R",
+      "cat": "生产中",
+      "status": "6-20中查需改善：C7451 中查报告：大货成品约50%\n1. 内侧骨单边溶皱\n2. 前腰摺长短不一致（跟船样一致）\n3. 打枣，驳线不良，起堆\n4. 布疵\n5. 前腰骨位高低不平齐\n6.脚口高低骨位\n7.后中长-7/8至-1寸",
+      "nextPlan": "待确认尾查时间，最迟6-26早上入仓",
+      "updateDate": "2026-06-22",
+      "editTime": 1782760474428,
+      "completed": true
+    },
+    {
+      "id": "ri3hK3",
+      "projectId": "rI5c4Y",
+      "cat": "生产中",
+      "status": "待重新确认7-2货期是否ok",
+      "nextPlan": "",
+      "updateDate": "2026-06-17",
+      "editTime": 1782760474428,
+      "completed": true
+    },
+    {
+      "id": "rcF9k3",
+      "projectId": "rI5c4Y",
+      "cat": "生产中",
+      "status": "客户要求全包边，待解决",
+      "nextPlan": "球跟加工厂沟通，我们也找找加工厂",
+      "updateDate": "2026-06-17",
+      "editTime": 1782760474428,
+      "completed": true
+    },
+    {
+      "id": "r20R1L",
+      "projectId": "rsIm0R",
+      "cat": "生产中",
+      "status": "入仓时间6-26",
+      "nextPlan": "",
+      "updateDate": "2026-06-17",
+      "editTime": 1782760474428,
+      "completed": true
+    }
+  ],
+  "updatedAt": "2026-07-01T20:29:16.081189+08:00",
+  "fileId": "SxhEwTWgxvBv"
+}

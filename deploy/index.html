@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chance 进度看板</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; background:#f5f6f8; color:#333; min-height:100vh; }
+.header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color:#fff; padding:16px 32px; position:sticky; top:0; z-index:100; box-shadow:0 2px 12px rgba(0,0,0,0.15); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+.header-left h1 { font-size:22px; font-weight:700; }
+.header-left .sub { font-size:12px; opacity:0.7; margin-top:3px; }
+.header-left .stats { display:flex; gap:12px; margin-top:8px; flex-wrap:wrap; }
+.header-left .stat { background:rgba(255,255,255,0.1); border-radius:8px; padding:5px 14px; }
+.header-left .stat .num { font-size:17px; font-weight:700; }
+.header-left .stat .label { font-size:11px; opacity:0.7; }
+.header-right { display:flex; align-items:center; gap:10px; }
+.sync-btn { padding:8px 20px; border:none; border-radius:8px; font-size:13px; font-weight:600; cursor:pointer; font-family:inherit; transition:all 0.2s; }
+.sync-btn.ready { background:#4caf50; color:#fff; }
+.sync-btn.ready:hover { background:#43a047; }
+.sync-btn.syncing { background:#ff9800; color:#fff; cursor:not-allowed; }
+.sync-info { font-size:11px; opacity:0.7; }
+.container { max-width:1400px; margin:0 auto; padding:16px 24px; }
+
+/* Filter */
+.filter-bar { display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap; align-items:center; }
+.filter-bar input, .filter-bar select { padding:7px 12px; border:1px solid #ddd; border-radius:8px; font-size:13px; outline:none; font-family:inherit; background:#fff; }
+.filter-bar input { width:220px; }
+.filter-bar input:focus, .filter-bar select:focus { border-color:#4a90d9; }
+.empty-state { text-align:center; padding:60px; color:#999; font-size:14px; }
+.loading-state { text-align:center; padding:80px; color:#888; }
+.loading-spinner { display:inline-block; width:32px; height:32px; border:3px solid #e0e0e0; border-top-color:#4a90d9; border-radius:50%; animation:spin 0.8s linear infinite; margin-bottom:12px; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* Section */
+.section-title { font-size:18px; font-weight:700; margin:24px 0 12px 0; padding-left:12px; border-left:4px solid #4a90d9; display:flex; align-items:center; gap:8px; }
+.section-title .sec-count { font-size:13px; color:#888; font-weight:400; }
+.section-title.order { border-left-color:#e74c3c; }
+.section-title.sample { border-left-color:#3498db; }
+
+/* Customer Group */
+.customer-group { margin-bottom:16px; }
+.customer-header { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+.customer-dot { width:10px; height:10px; border-radius:50%; }
+.customer-name { font-size:16px; font-weight:700; }
+.customer-count { font-size:12px; color:#888; }
+
+/* Table */
+.table-wrap { background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.06); border:1px solid #e8eaed; }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+thead th { background:#f8f9fb; color:#666; font-weight:600; padding:10px 12px; text-align:left; border-bottom:2px solid #e8eaed; white-space:nowrap; font-size:12px; position:sticky; top:0; }
+tbody td { padding:10px 12px; border-bottom:1px solid #f2f2f2; vertical-align:top; }
+tbody tr { cursor:pointer; transition:background 0.15s; }
+tbody tr:hover { background:#f6f9ff; }
+tbody tr.expanded { background:#f0f5ff; }
+td.proj-name { font-weight:600; color:#1a1a2e; white-space:nowrap; }
+td.proj-status { max-width:260px; color:#555; line-height:1.4; }
+
+/* Status dots */
+.status-dot { display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:4px; vertical-align:middle; }
+.status-dot.active { background:#ff9800; }
+.status-dot.shipped { background:#00695c; }
+.status-dot.done { background:#4caf50; }
+
+/* Badges */
+.badge { display:inline-block; padding:1px 8px; border-radius:8px; font-size:11px; font-weight:600; white-space:nowrap; margin:1px 2px; }
+.b-stage-报价 { background:#e3f2fd; color:#1565c0; }
+.b-stage-起版 { background:#ede7f6; color:#4527a0; }
+.b-stage-起版中 { background:#fff3e0; color:#e65100; }
+.b-stage-已报价 { background:#e8f5e9; color:#2e7d32; }
+.b-stage-已寄版 { background:#e0f2f1; color:#00695c; }
+.b-stage-已下单 { background:#fce4ec; color:#c62828; }
+.b-stage-归档 { background:#f5f5f5; color:#757575; }
+.b-cat-开发版 { background:#e3f2fd; color:#1565c0; }
+.b-cat-有数量 { background:#e8f5e9; color:#2e7d32; }
+.b-cat-生产中 { background:#fff3e0; color:#e65100; }
+.b-cat-已出货 { background:#e0f2f1; color:#00695c; }
+.b-cat-已收款 { background:#e8f5e9; color:#2e7d32; }
+.b-cat-归档 { background:#f5f5f5; color:#757575; }
+.b-factory { background:#f3e5f5; color:#6a1b9a; }
+.b-done { background:#e8f5e9; color:#2e7d32; }
+.b-countdown-overdue { background:#ffebee; color:#c62828; }
+.b-countdown-soon { background:#fff3e0; color:#e65100; }
+.b-countdown-ok { background:#e8f5e9; color:#2e7d32; }
+
+/* Expandable history */
+tr.history-row { display:none; cursor:default; }
+tr.history-row.show { display:table-row; }
+tr.history-row td { padding:0; background:#fafbfc; border-bottom:1px solid #e8eaed; }
+.history-panel { padding:12px 20px; }
+.history-panel .h-title { font-size:12px; font-weight:700; color:#888; margin-bottom:8px; }
+.history-item { display:flex; gap:12px; padding:8px 0; border-bottom:1px solid #f0f0f0; }
+.history-item:last-child { border-bottom:none; }
+.h-dot { flex-shrink:0; width:8px; height:8px; border-radius:50%; margin-top:4px; }
+.h-dot.done { background:#4caf50; }
+.h-dot.going { border:2px solid #ff9800; background:#fff; }
+.h-content { flex:1; }
+.h-meta { display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin-bottom:3px; }
+.h-text { font-size:13px; color:#555; line-height:1.4; }
+.h-next { font-size:12px; color:#ff9800; margin-top:3px; }
+.h-date { font-size:11px; color:#aaa; }
+.expand-icon { display:inline-block; font-size:11px; color:#4a90d9; transition:transform 0.2s; margin-left:4px; }
+tr.expanded .expand-icon { transform:rotate(180deg); }
+
+/* Sync toast */
+.toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:#333; color:#fff; padding:10px 24px; border-radius:8px; font-size:13px; z-index:1000; opacity:0; transition:opacity 0.3s; pointer-events:none; }
+.toast.show { opacity:1; }
+
+@media (max-width:800px) {
+  .header { padding:16px; }
+  .container { padding:8px; }
+  table { font-size:12px; }
+  thead th, tbody td { padding:8px 6px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <h1>Chance 进度看板</h1>
+    <div class="sub" id="updateTime">加载中...</div>
+    <div class="stats">
+      <div class="stat"><div class="num" id="totalOrders">-</div><div class="label">订单</div></div>
+      <div class="stat"><div class="num" id="totalOrderProgress">-</div><div class="label">订单进度</div></div>
+      <div class="stat"><div class="num" id="totalProjects">-</div><div class="label">样板</div></div>
+      <div class="stat"><div class="num" id="totalProgress">-</div><div class="label">样板进度</div></div>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="sync-info" id="syncInfo"></span>
+    <button class="sync-btn ready" id="syncBtn" onclick="triggerSync()">🔄 刷新数据</button>
+  </div>
+</div>
+
+<div class="container">
+  <div class="filter-bar">
+    <input type="text" id="searchInput" placeholder="搜索项目名称 / 跟单 / 客户..." oninput="renderAll()">
+    <select id="typeFilter" onchange="renderAll()">
+      <option value="">全部类型</option>
+      <option value="order">订单</option>
+      <option value="sample">样板</option>
+    </select>
+    <select id="customerFilter" onchange="renderAll()">
+      <option value="">全部客户</option>
+    </select>
+    <select id="catFilter" onchange="renderAll()">
+      <option value="">全部分类</option>
+    </select>
+    <select id="factoryFilter" onchange="renderAll()">
+      <option value="">全部工厂</option>
+    </select>
+    <select id="statusFilter" onchange="renderAll()">
+      <option value="">全部状态</option>
+      <option value="active">进行中</option>
+      <option value="completed">已完成</option>
+    </select>
+  </div>
+  <div id="content">
+    <div class="loading-state">
+      <div class="loading-spinner"></div>
+      <div>正在加载数据...</div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ========== DATA ==========
+let projectRecords = [];
+let progressRecords = [];
+let orderRecords = [];
+let orderProgressRecords = [];
+let dataUpdatedAt = null;
+
+// ========== DATA LOADING ==========
+async function loadData() {
+  try {
+    const resp = await fetch('./data.json?v=' + Date.now());
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const data = await resp.json();
+
+    projectRecords = data.projects || [];
+    progressRecords = data.progress || [];
+    orderRecords = data.orders || [];
+    orderProgressRecords = data.orderProgress || [];
+    dataUpdatedAt = data.updatedAt || null;
+
+    buildFilterOptions();
+    updateTimeDisplay();
+    renderAll();
+  } catch (err) {
+    console.error('Failed to load data:', err);
+    document.getElementById('content').innerHTML = '<div class="empty-state">数据加载失败，请稍后刷新重试</div>';
+  }
+}
+
+function updateTimeDisplay() {
+  const el = document.getElementById('updateTime');
+  const info = document.getElementById('syncInfo');
+  if (dataUpdatedAt) {
+    const d = new Date(dataUpdatedAt);
+    const s = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+    el.textContent = '数据更新：' + s;
+    const ago = Math.floor((Date.now() - d.getTime()) / 60000);
+    info.textContent = ago < 1 ? '刚刚更新' : ago < 60 ? ago+'分钟前更新' : Math.floor(ago/60)+'小时前更新';
+  }
+}
+
+async function triggerSync() {
+  const btn = document.getElementById('syncBtn');
+  btn.className = 'sync-btn syncing';
+  btn.textContent = '⏳ 刷新中...';
+  try {
+    await loadData();
+    showToast('数据已刷新');
+  } catch (err) {
+    showToast('刷新失败');
+  } finally {
+    btn.className = 'sync-btn ready';
+    btn.textContent = '🔄 刷新数据';
+  }
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timeout);
+  t._timeout = setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ========== HELPERS ==========
+function fmtDate(d) {
+  if (!d) return '';
+  if (/^\d{2}-\d{2}$/.test(d)) return d;
+  const m = d.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (m) return m[2] + '-' + m[3];
+  return d;
+}
+// Calculate days elapsed since a given date string (YYYY-MM-DD or MM-DD)
+function calcDays(dateStr) {
+  if (!dateStr) return '';
+  const m = dateStr.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (!m) return '';
+  const start = new Date(+m[1], +m[2]-1, +m[3]);
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const diff = Math.round((today - start) / 86400000);
+  return diff >= 0 ? diff : '';
+}
+// Customer sort priority: KSJ=1, GA=2, others=99
+function customerPriority(c) {
+  if (c === 'KSJ') return 1;
+  if (c === 'GA') return 2;
+  return 99;
+}
+
+// Order category sort priority: 生产中=1, 已出货=2, 已收款=3, others=99
+function catPriority(cat) {
+  if (cat === '生产中') return 1;
+  if (cat === '已出货') return 2;
+  if (cat === '已收款') return 3;
+  return 99;
+}
+
+// Latest progress for sample project
+function latestSample(pId) {
+  const items = progressRecords.filter(r => r.projectId === pId);
+  return items.length ? items.reduce((a,b) => {
+    if (a.updateDate !== b.updateDate) return a.updateDate > b.updateDate ? a : b;
+    return a.editTime > b.editTime ? a : b;
+  }) : null;
+}
+function allSampleProgress(pId) {
+  return progressRecords.filter(r => r.projectId === pId).sort((a,b) => {
+    if (b.updateDate !== a.updateDate) return b.updateDate > a.updateDate ? 1 : -1;
+    return b.editTime - a.editTime;
+  });
+}
+function isSampleDone(pId) {
+  const items = progressRecords.filter(r => r.projectId === pId);
+  return items.length && items.every(r => r.completed);
+}
+
+// Latest progress for order project
+function latestOrder(pId) {
+  const items = orderProgressRecords.filter(r => r.projectId === pId);
+  return items.length ? items.reduce((a,b) => {
+    if (a.updateDate !== b.updateDate) return a.updateDate > b.updateDate ? a : b;
+    return a.editTime > b.editTime ? a : b;
+  }) : null;
+}
+function allOrderProgress(pId) {
+  return orderProgressRecords.filter(r => r.projectId === pId).sort((a,b) => {
+    if (b.updateDate !== a.updateDate) return b.updateDate > a.updateDate ? 1 : -1;
+    return b.editTime - a.editTime;
+  });
+}
+function isOrderDone(pId) {
+  const items = orderProgressRecords.filter(r => r.projectId === pId);
+  return items.length && items.every(r => r.completed);
+}
+
+// ========== BUILD FILTER OPTIONS ==========
+function buildFilterOptions() {
+  const cats = new Set(), factories = new Set(), customers = new Set();
+  progressRecords.forEach(r => { if(r.cat) cats.add(r.cat); if(r.factory) factories.add(r.factory); });
+  orderProgressRecords.forEach(r => { if(r.cat) cats.add(r.cat); });
+  projectRecords.forEach(p => { if(p.customer) customers.add(p.customer); });
+  orderRecords.forEach(p => { if(p.customer) customers.add(p.customer); });
+
+  const ctf = document.getElementById('catFilter');
+  const ctfVal = ctf.value;
+  ctf.innerHTML = '<option value="">全部分类</option>' + [...cats].sort().map(c => '<option value="'+c+'">'+c+'</option>').join('');
+  ctf.value = ctfVal;
+
+  const ff = document.getElementById('factoryFilter');
+  const ffVal = ff.value;
+  ff.innerHTML = '<option value="">全部工厂</option>' + [...factories].sort().map(f => '<option value="'+f+'">'+f+'</option>').join('');
+  ff.value = ffVal;
+
+  const cf = document.getElementById('customerFilter');
+  const cfVal = cf.value;
+  cf.innerHTML = '<option value="">全部客户</option>' + [...customers].sort((a,b) => customerPriority(a) - customerPriority(b)).map(c => '<option value="'+c+'">'+c+'</option>').join('');
+  cf.value = cfVal;
+}
+
+// ========== RENDER ==========
+const stageCls = { '报价':'b-stage-报价','起版':'b-stage-起版','起版中':'b-stage-起版中','已报价':'b-stage-已报价','已寄版':'b-stage-已寄版','已下单':'b-stage-已下单','归档':'b-stage-归档' };
+function bStage(s) { return '<span class="badge '+(stageCls[s]||'')+'">'+s+'</span>'; }
+function bCat(c) {
+  const m = {'开发版':'b-cat-开发版','有数量':'b-cat-有数量','生产中':'b-cat-生产中','已出货':'b-cat-已出货','已收款':'b-cat-已收款','归档':'b-cat-归档'};
+  return '<span class="badge '+(m[c]||'')+'">'+c+'</span>';
+}
+const customerColors = { 'KSJ':'#e74c3c', 'GA':'#3498db', '迅捷诚':'#27ae60' };
+
+function renderAll() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const tf = document.getElementById('typeFilter').value;
+  const cf = document.getElementById('customerFilter').value;
+  const ctf = document.getElementById('catFilter').value;
+  const ff = document.getElementById('factoryFilter').value;
+  const stf = document.getElementById('statusFilter').value;
+
+  // Stats
+  document.getElementById('totalOrders').textContent = orderRecords.length;
+  document.getElementById('totalOrderProgress').textContent = orderProgressRecords.length;
+  document.getElementById('totalProjects').textContent = projectRecords.length;
+  document.getElementById('totalProgress').textContent = progressRecords.length;
+
+  // Filter orders (exclude 已归档)
+  let filteredOrders = orderRecords.filter(p => {
+    if (q && !p.name.toLowerCase().includes(q) && !p.merch.toLowerCase().includes(q) && !p.customer.toLowerCase().includes(q)) return false;
+    if (cf && p.customer !== cf) return false;
+    const l = latestOrder(p.id); if (!l) return false;
+    if (l.cat === '归档' || l.cat === '已归档') return false; // 归档不显示
+    if (ctf && l.cat !== ctf) return false;
+    if (ff && l.factory !== ff) return false;
+    if (stf === 'active' && isOrderDone(p.id)) return false;
+    if (stf === 'completed' && !isOrderDone(p.id)) return false;
+    return true;
+  });
+
+  // Filter samples
+  let filteredSamples = projectRecords.filter(p => {
+    if (q && !p.name.toLowerCase().includes(q) && !p.merch.toLowerCase().includes(q) && !p.customer.toLowerCase().includes(q)) return false;
+    if (cf && p.customer !== cf) return false;
+    const l = latestSample(p.id); if (!l) return false;
+    if (ctf && l.cat !== ctf) return false;
+    if (ff && l.factory !== ff) return false;
+    if (stf === 'active' && isSampleDone(p.id)) return false;
+    if (stf === 'completed' && !isSampleDone(p.id)) return false;
+    return true;
+  });
+
+  // Sort orders: customer priority → category priority → updateDate desc
+  filteredOrders.sort((a, b) => {
+    const cp = customerPriority(a.customer) - customerPriority(b.customer);
+    if (cp !== 0) return cp;
+    const la = latestOrder(a.id), lb = latestOrder(b.id);
+    const catP = catPriority(la ? la.cat : null) - catPriority(lb ? lb.cat : null);
+    if (catP !== 0) return catP;
+    if (la && lb) {
+      if (lb.updateDate !== la.updateDate) return lb.updateDate > la.updateDate ? 1 : -1;
+      return lb.editTime - la.editTime;
+    }
+    return 0;
+  });
+
+  // Sort samples: customer priority → completion (done last) → updateDate desc
+  filteredSamples.sort((a, b) => {
+    const cp = customerPriority(a.customer) - customerPriority(b.customer);
+    if (cp !== 0) return cp;
+    const da = isSampleDone(a.id), db = isSampleDone(b.id);
+    if (da !== db) return da ? 1 : -1; // 已完成排最后
+    const la = latestSample(a.id), lb = latestSample(b.id);
+    if (la && lb) {
+      if (lb.updateDate !== la.updateDate) return lb.updateDate > la.updateDate ? 1 : -1;
+      return lb.editTime - la.editTime;
+    }
+    return 0;
+  });
+
+  // Group by customer
+  function groupBy(projects) {
+    const groups = {};
+    projects.forEach(p => { if (!groups[p.customer]) groups[p.customer] = []; groups[p.customer].push(p); });
+    return Object.entries(groups).sort((a,b) => customerPriority(a[0]) - customerPriority(b[0]));
+  }
+
+  let html = '';
+
+  // Orders section
+  if (tf !== 'sample') {
+    if (filteredOrders.length) {
+      html += '<div class="section-title order">📦 订单进度 <span class="sec-count">'+filteredOrders.length+' 个项目</span></div>';
+      html += renderOrderGroups(groupBy(filteredOrders));
+    } else if (!tf) {
+      html += '<div class="section-title order">📦 订单进度</div><div class="empty-state">没有匹配的订单</div>';
+    }
+  }
+
+  // Samples section
+  if (tf !== 'order') {
+    if (filteredSamples.length) {
+      html += '<div class="section-title sample">📐 样板进度 <span class="sec-count">'+filteredSamples.length+' 个项目</span></div>';
+      html += renderSampleGroups(groupBy(filteredSamples));
+    } else if (!tf) {
+      html += '<div class="section-title sample">📐 样板进度</div><div class="empty-state">没有匹配的样板</div>';
+    }
+  }
+
+  if (!html) html = '<div class="empty-state">没有匹配的项目</div>';
+  document.getElementById('content').innerHTML = html;
+}
+
+function renderOrderGroups(groups) {
+  return groups.map(([cust, projects]) => {
+    return '<div class="customer-group">' +
+      '<div class="customer-header">' +
+        '<div class="customer-dot" style="background:'+(customerColors[cust]||'#888')+'"></div>' +
+        '<span class="customer-name">'+cust+'</span>' +
+        '<span class="customer-count">'+projects.length+' 个项目</span>' +
+      '</div>' +
+      '<div class="table-wrap"><table>' +
+        '<thead><tr>' +
+          '<th style="width:24px"></th><th>项目名称</th><th>跟单</th><th>更新日期</th><th>工厂货期</th><th>数量</th><th>倒计时</th><th>最新分类</th><th>最新情况</th><th style="width:20px"></th>' +
+        '</tr></thead><tbody>' +
+        projects.map(p => {
+          const l = latestOrder(p.id);
+          const ap = allOrderProgress(p.id);
+          const done = isOrderDone(p.id);
+          const sdCls = done ? 'done' : (l && l.cat === '已出货' ? 'shipped' : 'active');
+          const cdCls = p.countdown && p.countdown.includes('-') ? 'b-countdown-overdue' : (p.countdown && (p.countdown.includes('剩') && parseInt(p.countdown.match(/\d+/)) <= 7) ? 'b-countdown-soon' : 'b-countdown-ok');
+          return '<tr id="orow-'+p.id+'" onclick="toggleRow(\'orow-'+p.id+'\',\'ohist-'+p.id+'\')">' +
+            '<td><span class="status-dot '+sdCls+'"></span></td>' +
+            '<td class="proj-name">'+p.name+'</td>' +
+            '<td>'+p.merch+'</td>' +
+            '<td style="white-space:nowrap">'+fmtDate(l ? l.updateDate : '')+'</td>' +
+            '<td style="white-space:nowrap">'+fmtDate(p.factoryDate || '')+'</td>' +
+            '<td style="white-space:nowrap">'+(p.quantity ? p.quantity.toLocaleString() : '')+'</td>' +
+            '<td>'+(p.countdown ? '<span class="badge '+cdCls+'">'+p.countdown+'</span>' : '')+'</td>' +
+            '<td style="white-space:nowrap">'+(l ? bCat(l.cat) : '')+'</td>' +
+            '<td class="proj-status">'+(l ? l.status : '')+(done ? ' <span class="badge b-done">已完成</span>' : '')+'</td>' +
+            '<td><span class="expand-icon">▸</span></td>' +
+          '</tr>' +
+          '<tr class="history-row" id="ohist-'+p.id+'"><td colspan="10">' +
+            '<div class="history-panel">' +
+              '<div class="h-title">历史进度明细（'+ap.length+'条）</div>' +
+              ap.map(r => {
+                return '<div class="history-item">' +
+                  '<div class="h-dot '+(r.completed ? 'done' : 'going')+'"></div>' +
+                  '<div class="h-content">' +
+                    '<div class="h-meta">' +
+                      bCat(r.cat) +
+                      '<span class="h-date">'+fmtDate(r.updateDate)+'</span>' +
+                    '</div>' +
+                    '<div class="h-text">'+r.status+'</div>' +
+                    (r.nextPlan ? '<div class="h-next">下一步：'+r.nextPlan+'</div>' : '') +
+                  '</div>' +
+                '</div>';
+              }).join('') +
+            '</div>' +
+          '</td></tr>';
+        }).join('') +
+        '</tbody></table></div>' +
+    '</div>';
+  }).join('');
+}
+
+function renderSampleGroups(groups) {
+  return groups.map(([cust, projects]) => {
+    return '<div class="customer-group">' +
+      '<div class="customer-header">' +
+        '<div class="customer-dot" style="background:'+(customerColors[cust]||'#888')+'"></div>' +
+        '<span class="customer-name">'+cust+'</span>' +
+        '<span class="customer-count">'+projects.length+' 个项目</span>' +
+      '</div>' +
+      '<div class="table-wrap"><table>' +
+        '<thead><tr>' +
+          '<th style="width:24px"></th><th>项目名称</th><th>跟单</th><th>更新日期</th><th>天数</th><th>最新阶段</th><th>分类</th><th>工厂</th><th>最新情况</th><th style="width:20px"></th>' +
+        '</tr></thead><tbody>' +
+        projects.map(p => {
+          const l = latestSample(p.id);
+          const ap = allSampleProgress(p.id);
+          const done = isSampleDone(p.id);
+          const sdCls = done ? 'done' : (l && l.stage && l.stage.includes('已寄版') ? 'shipped' : 'active');
+          return '<tr id="srow-'+p.id+'" onclick="toggleRow(\'srow-'+p.id+'\',\'shist-'+p.id+'\')">' +
+            '<td><span class="status-dot '+sdCls+'"></span></td>' +
+            '<td class="proj-name">'+p.name+'</td>' +
+            '<td>'+p.merch+'</td>' +
+            '<td style="white-space:nowrap">'+fmtDate(l ? l.updateDate : '')+'</td>' +
+            '<td>'+calcDays(l ? l.updateDate : '')+'</td>' +
+            '<td style="white-space:nowrap">'+(l ? l.stage.map(s => bStage(s)).join('') : '')+'</td>' +
+            '<td>'+(l ? bCat(l.cat) : '')+'</td>' +
+            '<td>'+(l && l.factory ? '<span class="badge b-factory">'+l.factory+'</span>' : '')+'</td>' +
+            '<td class="proj-status">'+(l ? l.status : '')+(done ? ' <span class="badge b-done">已完成</span>' : '')+'</td>' +
+            '<td><span class="expand-icon">▸</span></td>' +
+          '</tr>' +
+          '<tr class="history-row" id="shist-'+p.id+'"><td colspan="10">' +
+            '<div class="history-panel">' +
+              '<div class="h-title">历史进度明细（'+ap.length+'条）</div>' +
+              ap.map(r => {
+                return '<div class="history-item">' +
+                  '<div class="h-dot '+(r.completed ? 'done' : 'going')+'"></div>' +
+                  '<div class="h-content">' +
+                    '<div class="h-meta">' +
+                      (r.stage ? r.stage.map(s => bStage(s)).join('') : '')+' '+(r.cat ? bCat(r.cat) : '')+' '+
+                      (r.factory ? '<span class="badge b-factory">'+r.factory+'</span>' : '') +
+                      '<span class="h-date">'+fmtDate(r.updateDate)+'</span>' +
+                    '</div>' +
+                    '<div class="h-text">'+r.status+'</div>' +
+                    (r.nextPlan ? '<div class="h-next">下一步：'+r.nextPlan+'</div>' : '') +
+                  '</div>' +
+                '</div>';
+              }).join('') +
+            '</div>' +
+          '</td></tr>';
+        }).join('') +
+        '</tbody></table></div>' +
+    '</div>';
+  }).join('');
+}
+
+function toggleRow(rowId, histId) {
+  document.querySelectorAll('tr.history-row').forEach(r => { if (r.id !== histId) r.classList.remove('show'); });
+  document.querySelectorAll('tbody tr.expanded').forEach(r => { if (r.id !== rowId) r.classList.remove('expanded'); });
+  const row = document.getElementById(rowId);
+  const hist = document.getElementById(histId);
+  row.classList.toggle('expanded');
+  hist.classList.toggle('show');
+}
+
+// ========== INIT ==========
+loadData();
+</script>
+</body>
+</html>
