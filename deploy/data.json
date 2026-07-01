@@ -1,69 +1,11 @@
 {
-  "orderStyles": [
-    {
-      "id": "rb3hpS",
-      "styleNo": "RXDJM9102292",
-      "factoryDate": "2026-08-05",
-      "qty": 3600,
-      "shipQty": 0,
-      "factory": "宏威",
-      "color": "BLUE"
-    },
-    {
-      "id": "rH3aCz",
-      "styleNo": "XRJKM5102320",
-      "factoryDate": "2026-08-30",
-      "qty": 3600,
-      "shipQty": 0,
-      "factory": "宏威",
-      "color": "BLUE"
-    },
-    {
-      "id": "rO6U4S",
-      "styleNo": "XRJKM5102321",
-      "factoryDate": "2026-08-30",
-      "qty": 2400,
-      "shipQty": 0,
-      "factory": "宏威",
-      "color": "BLUE"
-    },
-    {
-      "id": "ryzccM",
-      "styleNo": "XRJKM5102322",
-      "factoryDate": "2026-08-30",
-      "qty": 2400,
-      "shipQty": 0,
-      "factory": "宏威",
-      "color": "NAVY"
-    },
-    {
-      "id": "ribQXY",
-      "styleNo": "C2125",
-      "factoryDate": "2026-07-02",
-      "qty": 240,
-      "shipQty": 0,
-      "factory": "圆洋",
-      "color": "MEDIUM DENIM"
-    },
-    {
-      "id": "rsouuU",
-      "styleNo": "C2113",
-      "factoryDate": "2026-07-17",
-      "qty": 300,
-      "shipQty": 0,
-      "factory": "卓安",
-      "color": "NAVY"
-    },
-    {
-      "id": "rHWcqx",
-      "styleNo": "C7451",
-      "factoryDate": "2026-06-26",
-      "qty": 240,
-      "shipQty": 222,
-      "factory": "卓安",
-      "color": "DARK DENIM"
-    }
-  ],
+  "updatedAt": "2026-07-01T23:06:16.802446+08:00",
+  "fileId": "SxhEwTWgxvBv",
+  "projectSheetId": "t1NYAL",
+  "progressSheetId": "t00i2h",
+  "orderSheetId": "tJVlpd",
+  "orderProgressSheetId": "tBmCpQ",
+  "orderStyleSheetId": "t1QbGV",
   "projects": [
     {
       "id": "rk0ohr",
@@ -159,15 +101,18 @@
       "id": "rOdcVa",
       "projectId": "rKS2xt",
       "stage": [
-        "起版中"
+        "已寄版",
+        "已报价"
       ],
       "cat": "开发版",
       "factory": "泰新",
-      "status": "待寄版",
+      "status": "DHL：9489364511，已报价",
       "nextPlan": "",
       "updateDate": "2026-07-01",
-      "editTime": 0,
-      "completed": false
+      "editTime": null,
+      "completed": true,
+      "person": "",
+      "creator": ""
     },
     {
       "id": "ryZloS",
@@ -182,7 +127,9 @@
       "nextPlan": "等宏威起版",
       "updateDate": "2026-06-23",
       "editTime": 1782759554951,
-      "completed": false
+      "completed": false,
+      "person": "",
+      "creator": ""
     },
     {
       "id": "rZAFer",
@@ -197,7 +144,9 @@
       "nextPlan": "",
       "updateDate": "2026-06-25",
       "editTime": 1782759554951,
-      "completed": false
+      "completed": false,
+      "person": "",
+      "creator": ""
     },
     {
       "id": "rOlE8X",
@@ -211,7 +160,9 @@
       "nextPlan": "预计6-28寄版",
       "updateDate": "2026-06-22",
       "editTime": 1782875394308,
-      "completed": true
+      "completed": true,
+      "person": "",
+      "creator": ""
     },
     {
       "id": "rKuS0F",
@@ -226,7 +177,23 @@
       "nextPlan": "",
       "updateDate": "2026-06-29",
       "editTime": 1782875439752,
-      "completed": true
+      "completed": true,
+      "person": "",
+      "creator": "",
+      "images": [
+        {
+          "url": "https://docsaasimg1.docs.qq.com/image/1458639138478622692/FD4lZa2AQGTKSHakgIVEPY2EWC_5VQoj.jpeg?w=1279&h=1706",
+          "title": "d9aff8176c58e69435746e0acd1bc129.jpg"
+        },
+        {
+          "url": "https://docsaasimg1.docs.qq.com/image/1458639138478622692/FD4lZa2AQGSWUNM5sx1EqJdBDR-85Nv7.jpeg?w=1279&h=1706",
+          "title": "0615775fbff06b5ea39ec99d6c062511.jpg"
+        },
+        {
+          "url": "https://docsaasimg1.docs.qq.com/image/1458639138478622692/FD4lZa2AQGRQaL3WZHhCJ59d0x_aOqKL.jpeg?w=3072&h=4096",
+          "title": "7e0c8923796be0eed9f8ce8cdc467253.jpg"
+        }
+      ]
     },
     {
       "id": "rzHwJr",
@@ -241,7 +208,9 @@
       "nextPlan": "",
       "updateDate": "2026-06-30",
       "editTime": 1782789373472,
-      "completed": true
+      "completed": true,
+      "person": "",
+      "creator": ""
     },
     {
       "id": "r8Ww2C",
@@ -255,7 +224,9 @@
       "nextPlan": "",
       "updateDate": "2026-06-25",
       "editTime": 1782789345357,
-      "completed": true
+      "completed": true,
+      "person": "",
+      "creator": ""
     },
     {
       "id": "rwW64k",
@@ -269,7 +240,9 @@
       "nextPlan": "过几天看是否需要起版",
       "updateDate": "2026-06-23",
       "editTime": 1782789328824,
-      "completed": true
+      "completed": true,
+      "person": "",
+      "creator": ""
     },
     {
       "id": "rkxwwm",
@@ -284,7 +257,9 @@
       "nextPlan": "",
       "updateDate": "2026-06-29",
       "editTime": 1782759554951,
-      "completed": false
+      "completed": false,
+      "person": "",
+      "creator": ""
     },
     {
       "id": "rQO2DR",
@@ -299,7 +274,19 @@
       "nextPlan": "寄版+报价",
       "updateDate": "2026-06-17",
       "editTime": 1782759554951,
-      "completed": false
+      "completed": false,
+      "person": "",
+      "creator": "",
+      "images": [
+        {
+          "url": "https://docsaasimg1.docs.qq.com/image/1458639138478622692/FD4lZa2AQGRbLfO-I2FN6rzWwkAzBTuN.jpeg?w=3072&h=4096",
+          "title": "20260504 jacquard fabic B-F.jpg"
+        },
+        {
+          "url": "https://docsaasimg1.docs.qq.com/image/1458639138478622692/FD4lZa2AQGSdpseJwxVLw5wg1TaxhDQ-.jpeg?w=3072&h=4096",
+          "title": "20260504 jacquard fabic A-F.jpg"
+        }
+      ]
     },
     {
       "id": "r363LK",
@@ -314,7 +301,15 @@
       "nextPlan": "",
       "updateDate": "2026-06-22",
       "editTime": 1782759554951,
-      "completed": true
+      "completed": true,
+      "person": "",
+      "creator": "",
+      "images": [
+        {
+          "url": "https://docsaasimg1.docs.qq.com/image/1458639138478622692/FD4lZa2AQGTRtnzhUl9K5qRgYsvIWpW0.jpeg?w=1625&h=1265",
+          "title": "1000082698.jpg"
+        }
+      ]
     },
     {
       "id": "rAFVHo",
@@ -329,7 +324,9 @@
       "nextPlan": "",
       "updateDate": "2026-06-22",
       "editTime": 1782759554951,
-      "completed": true
+      "completed": true,
+      "person": "",
+      "creator": ""
     },
     {
       "id": "r28oCB",
@@ -344,7 +341,15 @@
       "nextPlan": "需确定陈生跟烫钻怎么对接？",
       "updateDate": "2026-06-19",
       "editTime": 1782759554951,
-      "completed": true
+      "completed": true,
+      "person": "",
+      "creator": "",
+      "images": [
+        {
+          "url": "https://docsaasimg1.docs.qq.com/image/1458639138478622692/FD4lZa2AQGTRtnzhUl9K5qRgYsvIWpW0.jpeg?w=1625&h=1265",
+          "title": "1000082698.jpg"
+        }
+      ]
     },
     {
       "id": "rHKwp3",
@@ -359,7 +364,35 @@
       "nextPlan": "",
       "updateDate": "2026-06-11",
       "editTime": 1782759554951,
-      "completed": true
+      "completed": true,
+      "person": "",
+      "creator": "",
+      "images": [
+        {
+          "url": "https://docsaasimg1.docs.qq.com/image/1458639138478622692/FD4lZa2AQGQ2E4-eLXhOnY8UkqWZWtZC.png?w=1500&h=2000",
+          "title": "silicon cargo PROTO-F-CHANCE-20260421.png"
+        },
+        {
+          "url": "https://docsaasimg1.docs.qq.com/image/1458639138478622692/FD4lZa2AQGR18MOZ6HVHOZCzQFLTCjSS.png?w=1500&h=2000",
+          "title": "C429G-PROTO-F-CHANCE-20260429.png"
+        },
+        {
+          "url": "https://docsaasimg1.docs.qq.com/image/1458639138478622692/FD4lZa2AQGT_CwA_gCRKwalIobt0tc7s.png?w=1500&h=2000",
+          "title": "Croc Print_Proto_B_Chance_20260413.png"
+        },
+        {
+          "url": "https://docsaasimg1.docs.qq.com/image/1458639138478622692/FD4lZa2AQGQb7ojn_xpKeZMHY71y4XdK.png?w=1500&h=2000",
+          "title": "silicon cargo PROTO-B-CHANCE-20260421.png"
+        },
+        {
+          "url": "https://docsaasimg1.docs.qq.com/image/1458639138478622692/FD4lZa2AQGScdgqBjrJIeL_C11kkFMex.png?w=1500&h=2000",
+          "title": "Croc Print_Proto_F_Chance_20260413.png"
+        },
+        {
+          "url": "https://docsaasimg1.docs.qq.com/image/1458639138478622692/FD4lZa2AQGTumwdoigFGrq13Dfz-QRuJ.png?w=1500&h=2000",
+          "title": "C429G-PROTO-B-CHANCE-20260429.png"
+        }
+      ]
     },
     {
       "id": "rrsqw1",
@@ -374,7 +407,9 @@
       "nextPlan": "",
       "updateDate": "2026-06-22",
       "editTime": 1782759554951,
-      "completed": true
+      "completed": true,
+      "person": "",
+      "creator": ""
     },
     {
       "id": "ruVRA1",
@@ -389,7 +424,9 @@
       "nextPlan": "工厂报价",
       "updateDate": "2026-06-22",
       "editTime": 1782759554951,
-      "completed": true
+      "completed": true,
+      "person": "",
+      "creator": ""
     },
     {
       "id": "rPRqLJ",
@@ -403,7 +440,23 @@
       "nextPlan": "看是否需要起版",
       "updateDate": "2026-06-18",
       "editTime": 1782759554951,
-      "completed": true
+      "completed": true,
+      "person": "",
+      "creator": "",
+      "images": [
+        {
+          "url": "https://docsaasimg1.docs.qq.com/image/1458639138478622692/FD4lZa2AQGRLzAhp9upLC5yYCT5JkMXz.jpeg?w=1280&h=1706.6666666666667",
+          "title": "CT517C_PROTO_B_CHANCE_20260517.jpg"
+        },
+        {
+          "url": "https://docsaasimg1.docs.qq.com/image/1458639138478622692/FD4lZa2AQGRoVi2PWjpIWJkVMnn4pdDm.jpeg?w=1280&h=1706.6666666666667",
+          "title": "CT517C_PROTO_F_CHANCE_20260517.jpg"
+        },
+        {
+          "url": "https://docsaasimg1.docs.qq.com/image/1458639138478622692/FD4lZa2AQGQMoFaHZv5FtqGqvttF5dr8.jpeg?w=3072&h=4096",
+          "title": "CT517C_PROTO_CHANCE_20260517.jpg"
+        }
+      ]
     },
     {
       "id": "rmSqME",
@@ -418,7 +471,9 @@
       "nextPlan": "",
       "updateDate": "2026-06-16",
       "editTime": 1782759554951,
-      "completed": true
+      "completed": true,
+      "person": "",
+      "creator": ""
     },
     {
       "id": "rnv7o0",
@@ -432,7 +487,15 @@
       "nextPlan": "",
       "updateDate": "2026-06-22",
       "editTime": 1782759554951,
-      "completed": true
+      "completed": true,
+      "person": "",
+      "creator": "",
+      "images": [
+        {
+          "url": "https://docsaasimg1.docs.qq.com/image/1458639138478622692/FD4lZa2AQGQ7clSCEY5BCoJUqKyp_MVD.png?w=622&h=1298",
+          "title": "图片.png"
+        }
+      ]
     },
     {
       "id": "rRITdi",
@@ -447,21 +510,26 @@
       "nextPlan": "",
       "updateDate": "2026-06-25",
       "editTime": 1782759554951,
-      "completed": true
+      "completed": true,
+      "person": "",
+      "creator": ""
     },
     {
       "id": "rmO9VA",
       "projectId": "rHnVA2",
       "stage": [
-        "起版中"
+        "已寄版",
+        "已报价"
       ],
       "cat": "开发版",
       "factory": "泰新",
-      "status": "待寄版",
+      "status": "DHL：9489364511，已报价",
       "nextPlan": "",
       "updateDate": "2026-07-01",
-      "editTime": 0,
-      "completed": false
+      "editTime": null,
+      "completed": true,
+      "person": "",
+      "creator": ""
     }
   ],
   "orders": [
@@ -525,7 +593,14 @@
       "nextPlan": "问工厂翻查情况",
       "updateDate": "2026-06-29",
       "editTime": 1782760474428,
-      "completed": false
+      "completed": false,
+      "factory": "",
+      "images": [
+        {
+          "url": "https://docsaasimg1.docs.qq.com/image/1458639138478622692/FD4lZa2AQGTHBbI6MN1NYLp5bBUYE42G.jpeg?w=4080&h=3060",
+          "title": "3fb3cddf603666d02aa4c59bd8969490.jpg"
+        }
+      ]
     },
     {
       "id": "rxBUvd",
@@ -535,7 +610,8 @@
       "nextPlan": "待工厂返修门筒弯曲露底筒问题和是否出货问题",
       "updateDate": "2026-07-01",
       "editTime": 1782875146792,
-      "completed": false
+      "completed": false,
+      "factory": ""
     },
     {
       "id": "rsHcbw",
@@ -545,7 +621,18 @@
       "nextPlan": "扣款邮件待处理",
       "updateDate": "2026-06-27",
       "editTime": 1782760474428,
-      "completed": false
+      "completed": false,
+      "factory": "",
+      "images": [
+        {
+          "url": "https://docsaasimg1.docs.qq.com/image/1458639138478622692/FD4lZa2AQGTT7cv50mFPL6s5LB-AT2gb.jpeg?w=1706&h=1279",
+          "title": "06ca844a502e7a92a70366876e04b30f.jpg"
+        },
+        {
+          "url": "https://docsaasimg1.docs.qq.com/image/1458639138478622692/FD4lZa2AQGQtR_a1vRxNGJH-vAmicz9I.jpeg?w=540&h=960",
+          "title": "a312f20700a54df1270f7da4da671da3.jpg"
+        }
+      ]
     },
     {
       "id": "rungxL",
@@ -555,7 +642,14 @@
       "nextPlan": "待工厂处理领子染色问题，确认船头版是否7-3前寄出",
       "updateDate": "2026-06-25",
       "editTime": 1782760474428,
-      "completed": false
+      "completed": false,
+      "factory": "",
+      "images": [
+        {
+          "url": "https://docsaasimg1.docs.qq.com/image/1458639138478622692/FD4lZa2AQGTiY3UjShxAZZkq3QVZfcVQ.jpeg?w=808&h=983",
+          "title": "0ed8d9676ad7b07090cb9d0f7c357a4f.jpg"
+        }
+      ]
     },
     {
       "id": "rYB6lc",
@@ -565,7 +659,8 @@
       "nextPlan": "",
       "updateDate": "2026-06-23",
       "editTime": 1782760474428,
-      "completed": false
+      "completed": false,
+      "factory": ""
     },
     {
       "id": "rFpsax",
@@ -575,7 +670,8 @@
       "nextPlan": "",
       "updateDate": "2026-06-17",
       "editTime": 1782760474428,
-      "completed": false
+      "completed": false,
+      "factory": ""
     },
     {
       "id": "rMPFUg",
@@ -585,7 +681,8 @@
       "nextPlan": "",
       "updateDate": "2026-06-17",
       "editTime": 1782760474428,
-      "completed": false
+      "completed": false,
+      "factory": ""
     },
     {
       "id": "rYcjSR",
@@ -595,7 +692,26 @@
       "nextPlan": "看大货开凤眼是否太大，6-29尾查，尾查前自行看看大货情况",
       "updateDate": "2026-06-27",
       "editTime": 1782760474428,
-      "completed": true
+      "completed": true,
+      "factory": "",
+      "images": [
+        {
+          "url": "https://docsaasimg1.docs.qq.com/image/1458639138478622692/FD4lZa2AQGR2MTflqCBH044ti9nwgraX.jpeg?w=3948&h=2044",
+          "title": "4387aafcda591fe6e6bc6639e4831492.jpg"
+        },
+        {
+          "url": "https://docsaasimg1.docs.qq.com/image/1458639138478622692/FD4lZa2AQGStxkBXG0lFLIOZ5f8fAbL2.png?w=1206&h=757",
+          "title": "62d112b2e59784e22655e0117e8846e1.png"
+        },
+        {
+          "url": "https://docsaasimg1.docs.qq.com/image/1458639138478622692/FD4lZa2AQGRpygH1K5RNPIWL4IF8v8UB.jpeg?w=1279&h=1706",
+          "title": "93f321c046986a5eff7f08110493fd6a6.jpg"
+        },
+        {
+          "url": "https://docsaasimg1.docs.qq.com/image/1458639138478622692/FD4lZa2AQGQxtbNLpKdIxKuflt3cyn71.jpeg?w=4080&h=3060",
+          "title": "51bb84c748df00e3142105648541356a.jpg"
+        }
+      ]
     },
     {
       "id": "rd5eCY",
@@ -605,7 +721,8 @@
       "nextPlan": "",
       "updateDate": "2026-06-24",
       "editTime": 1782760474428,
-      "completed": true
+      "completed": true,
+      "factory": ""
     },
     {
       "id": "rgL9Qe",
@@ -615,7 +732,8 @@
       "nextPlan": "",
       "updateDate": "2026-06-23",
       "editTime": 1782760474428,
-      "completed": true
+      "completed": true,
+      "factory": ""
     },
     {
       "id": "rmVCYE",
@@ -625,7 +743,8 @@
       "nextPlan": "",
       "updateDate": "2026-06-23",
       "editTime": 1782760474428,
-      "completed": true
+      "completed": true,
+      "factory": ""
     },
     {
       "id": "rmpl41",
@@ -635,7 +754,8 @@
       "nextPlan": "看洗水回来捆边的情况",
       "updateDate": "2026-06-22",
       "editTime": 1782760474428,
-      "completed": true
+      "completed": true,
+      "factory": ""
     },
     {
       "id": "rxyHCb",
@@ -645,17 +765,19 @@
       "nextPlan": "等评语",
       "updateDate": "2026-06-22",
       "editTime": 1782760474428,
-      "completed": true
+      "completed": true,
+      "factory": ""
     },
     {
       "id": "rfSRo6",
       "projectId": "rsIm0R",
       "cat": "生产中",
-      "status": "6-20中查需改善：C7451 中查报告：大货成品约50%\n1. 内侧骨单边溶皱\n2. 前腰摺长短不一致（跟船样一致）\n3. 打枣，驳线不良，起堆\n4. 布疵\n5. 前腰骨位高低不平齐\n6.脚口高低骨位\n7.后中长-7/8至-1寸",
+      "status": "6-20中查需改善",
       "nextPlan": "待确认尾查时间，最迟6-26早上入仓",
       "updateDate": "2026-06-22",
       "editTime": 1782760474428,
-      "completed": true
+      "completed": true,
+      "factory": ""
     },
     {
       "id": "ri3hK3",
@@ -665,7 +787,8 @@
       "nextPlan": "",
       "updateDate": "2026-06-17",
       "editTime": 1782760474428,
-      "completed": true
+      "completed": true,
+      "factory": ""
     },
     {
       "id": "rcF9k3",
@@ -675,7 +798,8 @@
       "nextPlan": "球跟加工厂沟通，我们也找找加工厂",
       "updateDate": "2026-06-17",
       "editTime": 1782760474428,
-      "completed": true
+      "completed": true,
+      "factory": ""
     },
     {
       "id": "r20R1L",
@@ -685,9 +809,80 @@
       "nextPlan": "",
       "updateDate": "2026-06-17",
       "editTime": 1782760474428,
-      "completed": true
+      "completed": true,
+      "factory": ""
     }
   ],
-  "updatedAt": "2026-07-01T13:10:27.114Z",
-  "fileId": "SxhEwTWgxvBv"
+  "orderStyles": [
+    {
+      "id": "rb3hpS",
+      "styleNo": "RXDJM9102292",
+      "factoryDate": "2026-08-05",
+      "qty": 3600,
+      "shipQty": null,
+      "factory": "宏威",
+      "color": "BLUE",
+      "orderId": "rD2gfF"
+    },
+    {
+      "id": "rH3aCz",
+      "styleNo": "XRJKM5102320",
+      "factoryDate": "2026-08-30",
+      "qty": 3600,
+      "shipQty": null,
+      "factory": "宏威",
+      "color": "BLUE",
+      "orderId": "rsifUf"
+    },
+    {
+      "id": "rO6U4S",
+      "styleNo": "XRJKM5102321",
+      "factoryDate": "2026-08-30",
+      "qty": 2400,
+      "shipQty": null,
+      "factory": "宏威",
+      "color": "BLUE",
+      "orderId": "rsifUf"
+    },
+    {
+      "id": "ryzccM",
+      "styleNo": "XRJKM5102322",
+      "factoryDate": "2026-08-30",
+      "qty": 2400,
+      "shipQty": null,
+      "factory": "宏威",
+      "color": "NAVY",
+      "orderId": "rsifUf"
+    },
+    {
+      "id": "ribQXY",
+      "styleNo": "C2125",
+      "factoryDate": "2026-07-02",
+      "qty": 240,
+      "shipQty": null,
+      "factory": "圆洋",
+      "color": "MEDIUM DENIM",
+      "orderId": "r9ZkQJ"
+    },
+    {
+      "id": "rsouuU",
+      "styleNo": "C2113",
+      "factoryDate": "2026-07-17",
+      "qty": 300,
+      "shipQty": null,
+      "factory": "卓安",
+      "color": "NAVY",
+      "orderId": "rI5c4Y"
+    },
+    {
+      "id": "rHWcqx",
+      "styleNo": "C7451",
+      "factoryDate": "2026-06-26",
+      "qty": 240,
+      "shipQty": 222,
+      "factory": "卓安",
+      "color": "DARK DENIM",
+      "orderId": "rsIm0R"
+    }
+  ]
 }
