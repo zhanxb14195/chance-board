@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-02T21:50:21.821861+08:00",
+  "updatedAt": "2026-07-02T22:32:33.284689+08:00",
   "fileId": "SxhEwTWgxvBv",
   "projectSheetId": "t1NYAL",
   "progressSheetId": "t00i2h",
@@ -7,6 +7,22 @@
   "orderProgressSheetId": "tBmCpQ",
   "orderStyleSheetId": "t1QbGV",
   "projects": [
+    {
+      "id": "roxcX2",
+      "name": "3款上衣",
+      "customer": "戴胜",
+      "merch": "",
+      "date": "",
+      "days": ""
+    },
+    {
+      "id": "raZuV2",
+      "name": "克罗心烫钻T恤",
+      "customer": "KSJ",
+      "merch": "",
+      "date": "",
+      "days": ""
+    },
     {
       "id": "rk0ohr",
       "name": "DOM 童装",
@@ -98,11 +114,58 @@
   ],
   "progress": [
     {
+      "id": "rujQzs",
+      "projectId": "roxcX2",
+      "stage": [
+        "报价",
+        "起版"
+      ],
+      "cat": "开发版",
+      "factory": "陈生",
+      "status": "报价和起版",
+      "nextPlan": "",
+      "updateDate": "2026-07-02",
+      "editTime": null,
+      "person": "",
+      "completed": false,
+      "creator": ""
+    },
+    {
+      "id": "roPu8C",
+      "projectId": "raZuV2",
+      "stage": [
+        "报价"
+      ],
+      "cat": "有数量",
+      "factory": "宏威",
+      "status": "待报价",
+      "nextPlan": "",
+      "updateDate": "2026-07-02",
+      "editTime": null,
+      "person": "",
+      "completed": false,
+      "creator": "",
+      "images": [
+        {
+          "url": "https://docimg10.docs.qq.com/image/AgAABY30xFID_BxI8UdD5aVyZW7wQUYT.png?w=1279&h=1706",
+          "title": "CT517B_PROTO_F_CHANCE_20260517.png"
+        },
+        {
+          "url": "https://docimg10.docs.qq.com/image/AgAABY30xFLmTa6m8btLmLtt9T8rKPxO.png?w=1279&h=1706",
+          "title": "CT517B_PROTO_B_CHANCE_20260517.png"
+        },
+        {
+          "url": "https://docimg5.docs.qq.com/image/AgAABY30xFJnnhlL7DJJ77bQEKIQNTPh.jpeg?w=1279&h=1706",
+          "title": "CT517B_PROTO_CHANCE_20260517.jpg"
+        }
+      ]
+    },
+    {
       "id": "rOdcVa",
       "projectId": "rKS2xt",
       "stage": [
         "已寄版",
-        "已报价"
+        "报价"
       ],
       "cat": "开发版",
       "factory": "泰新",
@@ -112,6 +175,23 @@
       "editTime": null,
       "completed": true,
       "person": "",
+      "creator": ""
+    },
+    {
+      "id": "roaILp",
+      "projectId": "rKS2xt",
+      "stage": [
+        "已寄版",
+        "报价"
+      ],
+      "cat": "开发版",
+      "factory": "泰新",
+      "status": "要问问泰新为什么加领子的羊羔绒贵那么多",
+      "nextPlan": "",
+      "updateDate": "2026-07-02",
+      "editTime": null,
+      "person": "",
+      "completed": false,
       "creator": ""
     },
     {
