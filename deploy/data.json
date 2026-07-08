@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-02T22:32:33.284689+08:00",
+  "updatedAt": "2026-07-08T09:58:17.004314+08:00",
   "fileId": "SxhEwTWgxvBv",
   "projectSheetId": "t1NYAL",
   "progressSheetId": "t00i2h",
@@ -11,16 +11,16 @@
       "id": "roxcX2",
       "name": "3款上衣",
       "customer": "戴胜",
-      "merch": "",
-      "date": "",
+      "merch": "Fanny",
+      "date": "2026-07-02",
       "days": ""
     },
     {
       "id": "raZuV2",
       "name": "克罗心烫钻T恤",
       "customer": "KSJ",
-      "merch": "",
-      "date": "",
+      "merch": "Noshaba",
+      "date": "2026-07-02",
       "days": ""
     },
     {
@@ -96,19 +96,19 @@
       "days": ""
     },
     {
-      "id": "rKS2xt",
-      "name": "提花衣服+仿羊羔绒",
-      "customer": "KSJ",
-      "merch": "Hackeem",
-      "date": "2026-06-09",
-      "days": ""
-    },
-    {
       "id": "rHnVA2",
       "name": "数码印花夹克+短裤",
       "customer": "KSJ",
       "merch": "Syleah",
       "date": "2026-04-21",
+      "days": ""
+    },
+    {
+      "id": "rE0UB8",
+      "name": "提花衣服+仿羊羔绒",
+      "customer": "KSJ",
+      "merch": "Braimah",
+      "date": "2026-06-09",
       "days": ""
     }
   ],
@@ -127,7 +127,24 @@
       "updateDate": "2026-07-02",
       "editTime": null,
       "person": "",
-      "completed": false,
+      "completed": true,
+      "creator": ""
+    },
+    {
+      "id": "rnIBUl",
+      "projectId": "roxcX2",
+      "stage": [
+        "报价",
+        "起版"
+      ],
+      "cat": "开发版",
+      "factory": "陈生",
+      "status": "价格差太远，放弃",
+      "nextPlan": "",
+      "updateDate": "2026-07-06",
+      "editTime": null,
+      "person": "",
+      "completed": true,
       "creator": ""
     },
     {
@@ -162,14 +179,14 @@
     },
     {
       "id": "rOdcVa",
-      "projectId": "rKS2xt",
+      "projectId": "rE0UB8",
       "stage": [
         "已寄版",
         "报价"
       ],
       "cat": "开发版",
       "factory": "泰新",
-      "status": "DHL：9489364511，已报价",
+      "status": "DHL：9489364511",
       "nextPlan": "",
       "updateDate": "2026-07-01",
       "editTime": null,
@@ -179,19 +196,19 @@
     },
     {
       "id": "roaILp",
-      "projectId": "rKS2xt",
+      "projectId": "rE0UB8",
       "stage": [
         "已寄版",
-        "报价"
+        "已报价"
       ],
       "cat": "开发版",
       "factory": "泰新",
-      "status": "要问问泰新为什么加领子的羊羔绒贵那么多",
+      "status": "已报价",
       "nextPlan": "",
       "updateDate": "2026-07-02",
       "editTime": null,
       "person": "",
-      "completed": false,
+      "completed": true,
       "creator": ""
     },
     {
@@ -206,9 +223,26 @@
       "status": "曹生报价$4.5，C报价$4.95.。厂货期8月底，C货期9-10",
       "nextPlan": "等宏威起版",
       "updateDate": "2026-06-23",
-      "editTime": 1782759554951,
-      "completed": false,
+      "editTime": 1783474208140,
+      "completed": true,
       "person": "",
+      "creator": ""
+    },
+    {
+      "id": "rED3v1",
+      "projectId": "rBRlic",
+      "stage": [
+        "起版中",
+        "已报价"
+      ],
+      "cat": "有数量",
+      "factory": "宏威",
+      "status": "翔报价非常高，拿到板后给黄生和Fanny报价",
+      "nextPlan": "",
+      "updateDate": "2026-07-07",
+      "editTime": 1783474256530,
+      "person": "",
+      "completed": false,
       "creator": ""
     },
     {
@@ -336,9 +370,41 @@
       "status": "问美国价格是否在目标价范围，能否先起一件版",
       "nextPlan": "",
       "updateDate": "2026-06-29",
-      "editTime": 1782759554951,
-      "completed": false,
+      "editTime": 1783343976993,
+      "completed": true,
       "person": "",
+      "creator": ""
+    },
+    {
+      "id": "rAcf2D",
+      "projectId": "rIqtd6",
+      "stage": [
+        "报价"
+      ],
+      "cat": "开发版",
+      "factory": "宏威",
+      "status": "问Fanny报价",
+      "nextPlan": "",
+      "updateDate": "2026-07-06",
+      "editTime": 1783474164045,
+      "person": "",
+      "completed": true,
+      "creator": ""
+    },
+    {
+      "id": "rYIkbq",
+      "projectId": "rIqtd6",
+      "stage": [
+        "报价"
+      ],
+      "cat": "开发版",
+      "factory": "宏威",
+      "status": "Fanny已报价，Chance已报价",
+      "nextPlan": "",
+      "updateDate": "2026-07-07",
+      "editTime": 1783474191965,
+      "person": "",
+      "completed": true,
       "creator": ""
     },
     {
@@ -672,8 +738,8 @@
       "status": "改30号尾查，洗水色偏黄偏浅，工厂返工喷油，翻查线头",
       "nextPlan": "问工厂翻查情况",
       "updateDate": "2026-06-29",
-      "editTime": 1782760474428,
-      "completed": false,
+      "editTime": 1783474297561,
+      "completed": true,
       "factory": "",
       "images": [
         {
@@ -689,9 +755,20 @@
       "status": "6-30已尾查，已寄两件大货和绿扣版给潘小姐看洗水",
       "nextPlan": "待工厂返修门筒弯曲露底筒问题和是否出货问题",
       "updateDate": "2026-07-01",
-      "editTime": 1782875146792,
-      "completed": false,
+      "editTime": 1783474296811,
+      "completed": true,
       "factory": ""
+    },
+    {
+      "id": "r19l5G",
+      "projectId": "r9ZkQJ",
+      "cat": "已出货",
+      "factory": "",
+      "status": "7-4出货",
+      "nextPlan": "",
+      "updateDate": "2026-07-04",
+      "editTime": 1783474373479,
+      "completed": false
     },
     {
       "id": "rsHcbw",
@@ -700,7 +777,7 @@
       "status": "6-26尾查，6-27已进仓，入仓需要给货运司机打印入仓单",
       "nextPlan": "扣款邮件待处理",
       "updateDate": "2026-06-27",
-      "editTime": 1782760474428,
+      "editTime": 1783474548342,
       "completed": false,
       "factory": "",
       "images": [
@@ -911,7 +988,7 @@
       "qty": 3600,
       "shipQty": null,
       "factory": "宏威",
-      "color": "BLUE",
+      "color": "",
       "orderId": "rsifUf"
     },
     {
@@ -939,7 +1016,7 @@
       "styleNo": "C2125",
       "factoryDate": "2026-07-02",
       "qty": 240,
-      "shipQty": null,
+      "shipQty": 228,
       "factory": "圆洋",
       "color": "MEDIUM DENIM",
       "orderId": "r9ZkQJ"
